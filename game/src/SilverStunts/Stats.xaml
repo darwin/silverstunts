@@ -1,0 +1,25 @@
+﻿<ss:ClipCanvas x:Name="stats"
+        xmlns="http://schemas.microsoft.com/client/2007"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ss="clr-namespace:SilverStunts;assembly=SilverStunts.dll"
+        Width="1000"
+        Height="600"
+        Visibility = "Hidden"
+        >
+
+  <Canvas.Resources>
+    <Storyboard x:Name="timer" Completed="onStatsTick">
+      <DoubleAnimation Duration="00:00:00.30" />
+    </Storyboard>
+  </Canvas.Resources>
+
+    <Canvas Canvas.Left="0" Canvas.Top="0" Width="1000" Height="64" Background="#444444" Opacity="0.3">
+      <TextBlock x:Name="pageStats" Foreground="Yellow" FontFamily="Monospace" FontWeight="Bold"  FontSize="10">
+        <TextBlock.RenderTransform>
+          <TranslateTransform X="2" Y="0"/>
+        </TextBlock.RenderTransform>
+      </TextBlock>
+    </Canvas>
+        
+
+</ss:ClipCanvas>

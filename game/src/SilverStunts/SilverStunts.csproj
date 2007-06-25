@@ -1,0 +1,153 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.20404</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D052FB1C-797A-4462-A121-1B138381BB57}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SilverStunts</RootNamespace>
+    <AssemblyName>SilverStunts</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="agclr" />
+    <Reference Include="IronPython" />
+    <Reference Include="IronPython.Modules" />
+    <Reference Include="Microsoft.Scripting" />
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="system.Xml.core" />
+    <Reference Include="system.silverlight" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DummyActor.cs" />
+    <Compile Include="Entities\Surface.cs" />
+    <Compile Include="EntityNamer.cs" />
+    <Compile Include="Bike.cs" />
+    <Compile Include="Brushes.cs" />
+    <Compile Include="ClipCanvas.cs" />
+    <Compile Include="Editor.cs" />
+    <Compile Include="Entities\Circle.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Generic.cs" />
+    <Compile Include="Entities\Line.cs" />
+    <Compile Include="Entities\Rectangle.cs" />
+    <Compile Include="Gizmo.xaml.cs">
+      <DependentUpon>Gizmo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Binder.xaml.cs">
+      <DependentUpon>Binder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game.xaml.cs">
+      <DependentUpon>Game.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IGizmo.cs" />
+    <Compile Include="Interfaces\IActor.cs" />
+    <Compile Include="Interfaces\IProgressBar.cs" />
+    <Compile Include="Layer.cs" />
+    <Compile Include="Level.cs" />
+    <Compile Include="LevelDescriptor.cs" />
+    <Compile Include="Page.xaml.cs">
+      <DependentUpon>Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceDownloader.cs" />
+    <Compile Include="ScriptShell.cs" />
+    <Compile Include="Stats.xaml.cs">
+      <DependentUpon>Stats.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <SilverlightPage Include="Page.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Level.py" />
+    <None Include="Page.py" />
+    <None Include="SilverStunts.html" />
+    <None Include="TestPage.html.js">
+      <DependentUpon>SilverStunts.html</DependentUpon>
+    </None>
+    <None Include="Silverlight.js" />
+    <EmbeddedResource Include="WPF.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Physics\Physics.csproj">
+      <Project>{D863E4F9-D0B6-489C-866E-CDA3CDBAD21B}</Project>
+      <Name>Physics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Binder.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Game.xaml">
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Gizmo.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema.cd" />
+    <None Include="CodeEditor.html" />
+    <None Include="ScriptConsole.html" />
+    <None Include="StuntsIDE.html" />
+    <Content Include="edit_area\edit_area_full.js" />
+    <Content Include="tabber.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tabber.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Stats.xaml">
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Help.xaml">
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\Silverlight\Microsoft.Silverlight.Csharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <WebProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,13 @@
+mary = Circle(1420, 380, 39)
+katka = Rectangle(15, 300, 30, 100)
+marka = Rectangle(945, 340, 50, 20)
+patricia = Circle(1490, 370, 33)
+liza = Rectangle(725, 330, 270, 40)
+linda = Rectangle(890, 335, 60, 30)
+barbara = Rectangle(1015, 385, 2030, 70)
+jana = Rectangle(995, 345, 50, 10)
+elizabeth = Circle(1970, 360, 36)
+klara = Line(240, 350, 390, 280)
+margaret = Circle(470, 350, 52)
+nancy = Circle(540, 340, 60)
+ 

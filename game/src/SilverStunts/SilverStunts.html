@@ -1,0 +1,183 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SilverStunts Game!</title>
+
+    <script type="text/javascript" src="Silverlight.js"></script>
+    <script type="text/javascript" src="TestPage.html.js"></script>
+
+    <script type="text/javascript">
+    
+    function OnLoad()
+    {
+        document.getElementById('SilverlightControl').focus();
+    }
+    
+    window.onload = OnLoad
+    
+    var ide;
+    function OpenIDE()
+    {
+        ide = window.open('StuntsIDE.html', 'ide', 'width=1000,height=400,scrollbars=no,toolbar=no,directories=no,status=no,menubar=no,resizable=yes');
+    }
+    
+    function EvalExpression(line, force)
+    {
+        var control = document.getElementById('SilverlightControl');
+        var res = control.Content.page.EvalExpression(line, force);
+    }
+    
+    function EvalEntities(code)
+    {
+        var control = document.getElementById('SilverlightControl');
+        var res = control.Content.page.EvalEntities(code);
+    }
+
+    function EvalLogic(code)
+    {
+        var control = document.getElementById('SilverlightControl');
+        var res = control.Content.page.EvalLogic(code);
+    }
+
+    function EvalForeground(xaml)
+    {
+        var control = document.getElementById('SilverlightControl');
+        var res = control.Content.page.EvalForeground(xaml);
+    }
+
+    function EvalBackground(xaml)
+    {
+        var control = document.getElementById('SilverlightControl');
+        var res = control.Content.page.EvalBackground(xaml);
+    }
+    
+    var consoleContent = "Silver Console 1.0 <font color=&quot;lightblue&quot;>[Python]</font><br/>===========================<br/>";
+    function OnPrintConsole(sender, args)
+    {
+        consoleContent += args.message;
+        UpdateConsole();
+    }
+
+    function OnShowWorldXAML(sender, args)
+    {
+       if (!ide || ide.closed) return false;
+       return ide.UpdateClipboard(args.xaml);
+    }
+
+    function OnRequestEntitiesSource(sender, args)
+    {
+       if (!ide || ide.closed) return null;
+       args.source = ide.RequestEntitiesSource();
+    }
+    
+    function OnPublishEntitiesSource(sender, args)
+    {
+       if (!ide || ide.closed) return null;
+       ide.PublishEntitiesSource(args.source);
+    }
+
+    function OnOpenScriptEditor(sender, args)
+    {
+       if (ide && !ide.closed) return null;
+       OpenIDE();
+    }
+
+    function OnUpdateIDE(sender, args)
+    {
+       if (!ide || ide.closed) return null;
+       UpdateIDE();
+    }
+    
+    function UpdateConsole()
+    {
+       if (!ide || ide.closed) return false;
+       return ide.UpdateConsole(consoleContent);
+    }
+
+    function UpdateEntities()
+    {
+       if (!ide || ide.closed) return false;
+       var control = document.getElementById('SilverlightControl');
+       var entitiesSource = control.Content.page.GetEntitiesSource();
+       return ide.UpdateEntities(entitiesSource);
+    }
+    
+    function UpdateLogic()
+    {
+       if (!ide || ide.closed) return false;
+       var control = document.getElementById('SilverlightControl');
+       var logicSource = control.Content.page.GetLogicSource();
+       return ide.UpdateLogic(logicSource);
+    }
+
+    function UpdateForeground()
+    {
+       if (!ide || ide.closed) return false;
+       var control = document.getElementById('SilverlightControl');
+       var foregroundSource = control.Content.page.GetForegroundSource();
+       return ide.UpdateForeground(foregroundSource);
+    }
+
+    function UpdateBackground()
+    {
+       if (!ide || ide.closed) return false;
+       var control = document.getElementById('SilverlightControl');
+       var backgroundSource = control.Content.page.GetBackgroundSource();
+       return ide.UpdateBackground(backgroundSource);
+    }
+    
+    function OnConsoleReady()
+    {
+        UpdateConsole();
+    }
+    
+    function OnEntitiesTabReady()
+    {
+        UpdateEntities();
+    }
+
+    function OnLogicTabReady()
+    {
+        UpdateLogic();
+    }
+
+    function OnForegroundTabReady()
+    {
+        UpdateForeground();
+    }
+
+    function OnBackgroundTabReady()
+    {
+        UpdateBackground();
+    }
+    
+    function UpdateIDE()
+    {
+        UpdateForeground();
+        UpdateBackground();
+        UpdateLogic();
+        UpdateEntities();
+        UpdateConsole();
+    }
+    
+    </script>
+
+    <style type="text/css">
+        #SilverlightControlHost
+        {
+            width: 1000px;
+            height: 600px;
+            border: solid 1px black;
+        }
+    </style>
+</head>
+<!-- Give the keyboard focus to the Silverlight control by default -->
+<body onload="document.getElementById('SilverlightControl').focus()">
+    <div id="SilverlightControlHost">
+
+        <script type="text/javascript">
+            createSilverlight("Page.xaml", "SilverlightControlHost", "SilverlightControl");
+        </script>
+
+    </div>
+</body>
+</html>

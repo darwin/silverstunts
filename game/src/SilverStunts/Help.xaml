@@ -1,0 +1,79 @@
+﻿<ss:ClipCanvas x:Name="help"
+        xmlns="http://schemas.microsoft.com/client/2007"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ss="clr-namespace:SilverStunts;assembly=SilverStunts.dll"
+        Width="1000"
+        Height="600"
+        Visibility = "Hidden"
+        >
+
+  <Canvas Canvas.Left="99" Canvas.Top="79" Width="802" Height="462" Background="#666666" Opacity="0.9">
+    <Canvas Canvas.Left="1" Canvas.Top="1" Width="800" Height="460" Background="#FFFFFFFF" Opacity="0.9">
+
+      <Canvas x:Name="mode" Width="283" Height="134" Canvas.Left="435" Canvas.Top="8">
+        <TextBlock x:Name="label" Foreground="#FFFF0000" FontFamily="Verdana" FontWeight="Bold" FontSize="18" FontStretch="Normal" FontStyle="Normal" Text="Mode Controls">
+          <TextBlock.RenderTransform>
+            <TranslateTransform X="2" Y="5"/>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="content" Foreground="Black" FontFamily="Verdana" FontWeight="Bold"  FontSize="14" Width="283" Height="107" Canvas.Top="27">
+          <TextBlock.RenderTransform>
+            <TranslateTransform X="2" Y="5"/>
+          </TextBlock.RenderTransform><Run Foreground="#FFFF0000">F1</Run> 		- help screen<LineBreak/><Run Foreground="#FFFF0000">F2 </Run>		- statistics screen<LineBreak/><Run Foreground="#FFFF0000">F4 </Run>		- script editor<LineBreak/><Run Foreground="#FFFF0000">SPACE</Run> 		- toggle edit mode<LineBreak/><Run Foreground="#FFFF0000">TAB </Run>		- next level<LineBreak/><Run Foreground="#FFFF0000">ENTER</Run>		- reset level
+        </TextBlock>
+      </Canvas>
+
+      <Canvas x:Name="game" Width="283" Height="134" Canvas.Left="8" Canvas.Top="8">
+        <TextBlock x:Name="label2" Foreground="Black" FontFamily="Verdana" FontWeight="Bold"  FontSize="18" FontStretch="Normal" FontStyle="Normal">
+          <TextBlock.RenderTransform>
+            <TranslateTransform X="2" Y="5"/>
+          </TextBlock.RenderTransform>
+          <Run Foreground="#FF001EFF">Game Controls</Run>
+        </TextBlock>
+        <TextBlock x:Name="content2" Foreground="Black" FontFamily="Verdana" FontWeight="Bold"  FontSize="14" Width="283" Height="107" Canvas.Top="27">
+          <TextBlock.RenderTransform>
+            <TranslateTransform X="2" Y="5"/>
+          </TextBlock.RenderTransform><Run Foreground="#FF001EFF">A,D</Run> 		- left, right<LineBreak/><Run Foreground="#FF001EFF">W,S </Run>		- up, jump (charge)<LineBreak/><Run Foreground="#FF001EFF">ENTER</Run>		- reset level<LineBreak/><LineBreak/>Don't hurt your player !
+        </TextBlock>
+      </Canvas>
+
+      <Canvas x:Name="edit" Width="360" Height="276" Canvas.Left="8" Canvas.Top="146">
+        <TextBlock x:Name="label1" Foreground="#FF1A6100" FontFamily="Verdana" FontWeight="Bold"  FontSize="18" FontStretch="Normal" FontStyle="Normal" Text="Edit Controls">
+          <TextBlock.RenderTransform>
+            <TranslateTransform X="2" Y="5"/>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="content1" Foreground="Black" FontFamily="Verdana" FontWeight="Bold"  FontSize="14" Width="367" Height="241" Canvas.Top="27">
+          <TextBlock.RenderTransform>
+            <TranslateTransform X="2" Y="5"/>
+          </TextBlock.RenderTransform><Run Foreground="#FF1A6100">I,J,K,L		</Run>- scrolling<LineBreak/><Run Foreground="#FF1A6100">Page Up </Run>	- zoom out<LineBreak/><Run Foreground="#FF1A6100">Page Down </Run>	- zoom in<LineBreak/><Run Foreground="#FF1A6100">Home</Run>		- reset zoom and scrolling<LineBreak/><Run Foreground="#FF1A6100">End		</Run>- reset zoom<LineBreak/><LineBreak/><Run Foreground="#FF1A6100">CTRL+C</Run>	- copy to clipboard<LineBreak/><Run Foreground="#FF1A6100">CTRL+V</Run>	- paste from clipboard<LineBreak/><LineBreak/><Run Foreground="#FF1A6100">Mouse	+ Left Click </Run>- select<LineBreak/>	<Run Foreground="#FF1A6100">+ hold CTRL </Run>- add selection<LineBreak/>	<Run Foreground="#FF1A6100">+ drag </Run>- to drag selection<LineBreak/>
+        </TextBlock>
+        <TextBlock x:Name="content3" Foreground="Black" FontFamily="Verdana" FontWeight="Bold"  FontSize="14" Width="355" Height="80" Canvas.Left="427" Canvas.Top="28">
+          <TextBlock.RenderTransform>
+            <TranslateTransform X="2" Y="5"/>
+          </TextBlock.RenderTransform><Run Foreground="#FF1A6100">G </Run>		- toggle grid<LineBreak/><Run Foreground="#FF1A6100">F</Run>		- toggle freeze mode<LineBreak/><Run Foreground="#FF1A6100">N</Run>		- toggle names<LineBreak/><Run Foreground="#FF1A6100">R</Run>		- render XAML screenshot<LineBreak/>
+        </TextBlock>
+      </Canvas>
+
+      <Canvas x:Name="seditor" Width="360" Height="276" Canvas.Left="435" Canvas.Top="271">
+        <TextBlock x:Name="label3" Foreground="#FF1A6100" FontFamily="Verdana" FontWeight="Bold"  FontSize="18" FontStretch="Normal" FontStyle="Normal" Canvas.Top="0">
+          <TextBlock.RenderTransform>
+            <TranslateTransform X="2" Y="5"/>
+          </TextBlock.RenderTransform>
+          <Run Foreground="#FF630064">Script Editor</Run>
+        </TextBlock>
+        <TextBlock x:Name="content5" Foreground="Black" FontFamily="Verdana" FontWeight="Bold"  FontSize="14" Width="355" Height="257" Canvas.Left="0" Canvas.Top="28">
+          <TextBlock.RenderTransform>
+            <TranslateTransform X="2" Y="5"/>
+          </TextBlock.RenderTransform><Run Foreground="#FF630064">CTRL+ENTER		</Run>- evaluate script<LineBreak/><Run Foreground="#FF630064">ENTER in console </Run>	- execute command<LineBreak/>
+        </TextBlock>
+      </Canvas>
+      
+      <Path Fill="#FF3248EB" Stretch="Fill" Stroke="#FF233BF1" StrokeThickness="2" Width="350" Height="1" Canvas.Left="10" Canvas.Top="35" Data="M5,31 L320,31"/>
+      <Path Fill="#FF630064" Stretch="Fill" Stroke="#FF630064" StrokeThickness="2" Width="350" Height="1" Canvas.Left="435" Canvas.Top="300" Data="M5,39 L320,39"/>
+      <Path Fill="#FFF1F1F1" Stretch="Fill" Stroke="#FFF12323" StrokeThickness="2" Width="350" Height="1" Canvas.Left="435" Canvas.Top="35" Data="M5,39 L320,39"/>
+      <Path Fill="#FF1A6100" Stretch="Fill" Stroke="#FF387123" StrokeThickness="2" Width="775" Height="1" Canvas.Left="10" Canvas.Top="174" Data="M5,175 L775,175"/>
+
+    </Canvas>
+  </Canvas>
+</ss:ClipCanvas>

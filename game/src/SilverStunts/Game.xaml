@@ -1,0 +1,47 @@
+﻿<ss:ClipCanvas x:Name="viewport"
+        xmlns="http://schemas.microsoft.com/client/2007"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ss="clr-namespace:SilverStunts;assembly=SilverStunts.dll"
+        Width="1000" Height="600"
+        Background="#EEEEEE"
+        >
+
+  <Canvas x:Name="gui" >
+    <!-- Here will be inserted game UI elements -->
+  </Canvas>
+  
+  <!-- Scrolling canvas for game and editor -->
+  <Canvas x:Name="scroller">
+    
+    <Canvas.RenderTransform>
+      <TransformGroup>
+        <TranslateTransform X="0" Y="0"/>
+      </TransformGroup>
+    </Canvas.RenderTransform>
+
+    <Canvas x:Name="background">
+      <!-- Here will be inserted background xaml -->
+    </Canvas>
+
+    <Canvas x:Name="world">
+      <!-- Here will be inserted game entities -->
+    </Canvas>
+
+    <Canvas x:Name="foreground">
+      <!-- Here will be inserted foreground xaml -->
+    </Canvas>
+
+    <Canvas x:Name="workspace">
+      <!-- Here will be inserted editor UI elements (gizmos, etc) -->
+    </Canvas>
+
+  </Canvas>
+
+  <Canvas Visibility="Hidden" x:Name="grid" Opacity="0.1" Width="1000" Height="600">
+    <Canvas.Background>
+      <!-- SilverLight 1.1ALPHA does not support TileMode property on ImageBrush => need to improvise using image -->
+      <ImageBrush ImageSource="Graphics/Grid.png" />
+    </Canvas.Background>
+  </Canvas>
+
+</ss:ClipCanvas>

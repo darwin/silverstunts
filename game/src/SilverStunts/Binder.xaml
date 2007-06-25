@@ -1,0 +1,97 @@
+﻿<BinderDefinitions>
+
+  <Binder Type="Wheel">
+    <Canvas.RenderTransform>
+      <TransformGroup>
+        <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
+        <TranslateTransform X="{Curr.X}" Y="{Curr.Y}"/>
+      </TransformGroup>
+    </Canvas.RenderTransform>
+    <Ellipse Width="{Diameter}" Height="{Diameter}" RenderTransformOrigin="0.5, 0.5">
+      <Ellipse.RenderTransform>
+        <TransformGroup>
+          <RotateTransform Angle="{Angle}"/>
+        </TransformGroup>
+      </Ellipse.RenderTransform>
+      <Ellipse.Fill>
+        <ImageBrush ImageSource="Graphics/Wheel.png" />
+      </Ellipse.Fill>
+    </Ellipse>
+  </Binder>
+
+  <Binder Type="CircleParticle">
+    <Canvas.RenderTransform>
+      <TransformGroup>
+        <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
+        <TranslateTransform X="{Curr.X}" Y="{Curr.Y}"/>
+      </TransformGroup>
+    </Canvas.RenderTransform>
+    <Ellipse Width="{Diameter}" Height="{Diameter}" Fill="Blue" RenderTransformOrigin="0.5, 0.5"/>
+  </Binder>
+
+  <Binder Type="RectangleParticle">
+    <Canvas.RenderTransform>
+      <TransformGroup>
+        <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
+        <TranslateTransform X="{Curr.X}" Y="{Curr.Y}"/>
+      </TransformGroup>
+    </Canvas.RenderTransform>
+    <Rectangle Width="{Width}" Height="{Height}" Fill="#80FF0000" Stroke="#80000000" StrokeThickness="0.01"/>
+  </Binder>
+
+  <Binder Type="LineSurface">
+    <Canvas.RenderTransform>
+      <TransformGroup>
+        <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
+        <TranslateTransform X="{Center.X}" Y="{Center.Y}"/>
+      </TransformGroup>
+    </Canvas.RenderTransform>
+    <Line X1="{P1.X}" Y1="{P1.Y}" X2="{P2.X}" Y2="{P2.Y}" Stroke="Green"/>
+    <Line X1="{P1.X}" Y1="{P1.Y}" X2="{P2.X}" Y2="{P2.Y}" Stroke="Gray">
+      <Line.RenderTransform>
+        <TransformGroup>
+          <TranslateTransform X="{CollisionDepthNormal.X}" Y="{CollisionDepthNormal.Y}"/>
+        </TransformGroup>
+      </Line.RenderTransform>
+    </Line>
+    <TextBlock Text="Line" FontFamily="Verdana" FontSize="10">
+      <TextBlock.RenderTransform>
+        <TranslateTransform X="{CenterOffsetInv.X}" Y="{CenterOffsetInv.Y}"/>
+      </TextBlock.RenderTransform>
+    </TextBlock>
+  </Binder>
+
+  <Binder Type="RectangleSurface">
+    <Canvas.RenderTransform>
+      <TransformGroup>
+        <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
+        <TranslateTransform X="{Center.X}" Y="{Center.Y}"/>
+      </TransformGroup>
+    </Canvas.RenderTransform>
+    <Rectangle Width="{Width}" Height="{Height}" Fill="#80FF0000" Stroke="#80000000" StrokeThickness="0.01"/>
+    <TextBlock Text="Rectangle" FontFamily="Verdana" FontSize="10"/>
+  </Binder>
+
+  <Binder Type="CircleSurface">
+    <Canvas.RenderTransform>
+      <TransformGroup>
+        <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
+        <TranslateTransform X="{Center.X}" Y="{Center.Y}"/>
+      </TransformGroup>
+    </Canvas.RenderTransform>
+    <Ellipse Width="{Diameter}" Height="{Diameter}" Fill="#8888FF" RenderTransformOrigin="0.5, 0.5"/>
+    <TextBlock Text="Circle" FontFamily="Verdana" FontSize="10"/>
+  </Binder>
+
+  <Binder Type="AngularConstraint">
+  </Binder>
+
+  <Binder Type="SpringConstraint">
+    <!--<Line X1="{P1.Curr.X}" Y1="{P1.Curr.Y}" X2="{P2.Curr.X}" Y2="{P2.Curr.Y}" Stroke="Orange"/>-->
+  </Binder>
+
+  <Binder Type="CollisionState">
+    <Line X1="{P1.X}" Y1="{P1.Y}" X2="{P2.X}" Y2="{P2.Y}" Stroke="Green" StrokeThickness="4"/>
+  </Binder>
+
+</BinderDefinitions>
