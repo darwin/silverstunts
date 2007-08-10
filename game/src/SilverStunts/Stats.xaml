@@ -4,7 +4,7 @@
         xmlns:ss="clr-namespace:SilverStunts;assembly=SilverStunts.dll"
         Width="1000"
         Height="600"
-        Visibility = "Hidden"
+        Visibility = "Collapsed"
         >
 
   <Canvas.Resources>

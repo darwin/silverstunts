@@ -14,7 +14,7 @@ namespace SilverStunts
     public class Help : Control
     {
         public ClipCanvas content;
-        public bool Visible { get { return content.Visibility == Visibility.Visible; } set { content.Visibility = value ? Visibility.Visible : Visibility.Hidden; } }
+        public bool Visible { get { return content.Visibility == Visibility.Visible; } set { content.Visibility = value ? Visibility.Visible : Visibility.Collapsed; } }
 
         TextBlock pageHelp;
 

@@ -1,12 +1,13 @@
 ﻿<Canvas x:Name="root"
-        xmlns="http://schemas.microsoft.com/client/2007"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Width="1000"
         Height="600"
         Background="Black"
         >
 
-  <x:Code Source="Page.py" Type="text/python" />
+  <x:Code Source="Page.py" Type="text/ironpython" />
+
   <Canvas x:Name="loadingHelper" Loaded="onLoaded" />
 
   <Canvas.Resources>
@@ -28,7 +29,7 @@
     <!-- here will be inserted statistcs component -->
   </Canvas>
 
-  <Canvas x:Name="continue" Canvas.Left="0" Canvas.Top="0" Visibility="Hidden">
+  <Canvas x:Name="continue" Canvas.Left="0" Canvas.Top="0" Visibility="Collapsed">
     <TextBlock x:Name="presskey" Text="Press any key to start again" FontWeight="Bold" Foreground="Black" FontFamily="Verdana" FontSize="22">
       <TextBlock.RenderTransform>
         <TranslateTransform X="350" Y="300"/>

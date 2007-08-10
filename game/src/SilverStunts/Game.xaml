@@ -37,7 +37,7 @@
 
   </Canvas>
 
-  <Canvas Visibility="Hidden" x:Name="grid" Opacity="0.1" Width="1000" Height="600">
+  <Canvas Visibility="Collapsed" x:Name="grid" Opacity="0.1" Width="1000" Height="600">
     <Canvas.Background>
       <!-- SilverLight 1.1ALPHA does not support TileMode property on ImageBrush => need to improvise using image -->
       <ImageBrush ImageSource="Graphics/Grid.png" />

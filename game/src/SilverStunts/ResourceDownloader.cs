@@ -69,7 +69,7 @@ namespace SilverStunts
 
         public string UrlResourceName(string cat, string item, string name)
         {
-            return cat + "/" + item + "/" + name;
+            return "http://silverstunts.com/secret/" + cat + "/" + item + "/" + name; // HACK
         }
         
         public void AddItem(string item, string name)
@@ -84,7 +84,7 @@ namespace SilverStunts
             string resourceUrl = UrlResourceName(category, item, name);
 
             Downloader downloader = new Downloader(); 
-            downloader.Open("GET", new Uri(resourceUrl, UriKind.Relative), true);
+            downloader.Open("GET", new Uri(resourceUrl, UriKind.RelativeOrAbsolute));
 
             Descriptor descriptor = new Descriptor(this, downloader, progress);
             descriptors.Add(resourceUrl, descriptor);

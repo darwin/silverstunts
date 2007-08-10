@@ -14,7 +14,7 @@ namespace SilverStunts
     public class Stats : Control
     {
         public ClipCanvas content;
-        public bool Visible { get { timer.Begin(); return content.Visibility == Visibility.Visible; } set { content.Visibility = value ? Visibility.Visible : Visibility.Hidden; } }
+        public bool Visible { get { timer.Begin(); return content.Visibility == Visibility.Visible; } set { content.Visibility = value ? Visibility.Visible : Visibility.Collapsed; } }
         Storyboard timer;
 
         TextBlock pageStats;

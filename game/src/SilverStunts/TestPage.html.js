@@ -13,7 +13,8 @@ function initSilverLightControl(sender, args)
 //contains calls to silverlight.js, example below loads Page.xaml
 function createSilverlight(xaml, host, id)
 {
-	Sys.Silverlight.createObjectEx({
+/*
+	Silverlight.createObjectEx({
 		source: xaml,
 		parentElement: document.getElementById(host),
 		id: id,
@@ -27,4 +28,10 @@ function createSilverlight(xaml, host, id)
 		  onLoad: initSilverLightControl
 		}
 	});
+*/
+    Silverlight.createObject(xaml, document.getElementById(host), id,
+                                 {width:'100%', height:'100%',version:'1.1'/*,enableHtmlAccess: true*/},
+                                 { onLoad: initSilverLightControl
+                                 },
+                                 null);
 }

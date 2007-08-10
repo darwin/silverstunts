@@ -70,7 +70,7 @@ namespace SilverStunts
         public void Enable()
         {
             Active = true;
-            grid.Visibility = GridEnabled ? Visibility.Visible : Visibility.Hidden;
+            grid.Visibility = GridEnabled ? Visibility.Visible : Visibility.Collapsed;
             if (!frozen) game.DisableSimulation();
         }
 
@@ -80,7 +80,7 @@ namespace SilverStunts
             dragGizmos.Clear();
             clipboard.Clear();
             Active = false;
-            grid.Visibility = Visibility.Hidden;
+            grid.Visibility = Visibility.Collapsed;
             game.EnableSimulation();
         }
 
@@ -172,7 +172,7 @@ namespace SilverStunts
             zoom = z;
             if (z != 1.00)
             {
-                grid.Visibility = Visibility.Hidden;
+                grid.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -334,7 +334,7 @@ namespace SilverStunts
         {
             if (!Active) return;
             gridEnabled = false;
-            grid.Visibility = Visibility.Hidden;
+            grid.Visibility = Visibility.Collapsed;
         }
 
         public void ResetScrollPane()

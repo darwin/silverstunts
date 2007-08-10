@@ -442,7 +442,7 @@ namespace SilverStunts
             if (e.Key == 57) // F2
             {
                 stats.Visible = !stats.Visible;
-                topline.Visibility = !stats.Visible ? Visibility.Visible : Visibility.Hidden;
+                topline.Visibility = !stats.Visible ? Visibility.Visible : Visibility.Collapsed;
                 return true;
             }
 
@@ -517,7 +517,7 @@ namespace SilverStunts
             }
             else
             {
-                continueInfo.Visibility = Visibility.Hidden;
+                continueInfo.Visibility = Visibility.Collapsed;
                 anyKeyRestart = false;
             }
             StartTimer();
