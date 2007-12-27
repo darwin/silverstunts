@@ -119,7 +119,6 @@
     <Content Include="CodeEditor.html" />
     <Content Include="ScriptConsole.html" />
     <Content Include="StuntsIDE.html" />
-    <Content Include="edit_area\edit_area_full.js" />
     <Content Include="tabber.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
