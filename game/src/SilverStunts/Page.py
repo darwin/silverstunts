@@ -2,7 +2,6 @@
 # it acts as a scripting DLR bootstrapper (I was unable to intialize python scripting engine from managed code)
 # we load managed assembly and route all relevant actions to it
 
-#from System import *
 import sys, clr
 
 SilverStunts = clr.LoadAssemblyByName("SilverStunts, Version=1.0.0.0")

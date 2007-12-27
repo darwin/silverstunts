@@ -107,7 +107,7 @@ namespace SilverStunts
         {
             Current = this;
             this.root = root;
-            //UseHTMLTimer();
+            UseHTMLTimer();
 
             // register the scriptable endpoints
             WebApplication.Current.RegisterScriptableObject("page", this);

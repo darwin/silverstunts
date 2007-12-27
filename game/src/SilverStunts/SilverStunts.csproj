@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20404</ProductVersion>
+    <ProductVersion>9.0.20706</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D052FB1C-797A-4462-A121-1B138381BB57}</ProjectGuid>
     <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -90,12 +90,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Level.py" />
-    <None Include="Page.py" />
-    <None Include="SilverStunts.html" />
-    <None Include="TestPage.html.js">
+    <Content Include="Page.py" />
+    <Content Include="SilverStunts.html" />
+    <Content Include="TestPage.html.js">
       <DependentUpon>SilverStunts.html</DependentUpon>
-    </None>
-    <None Include="Silverlight.js" />
+    </Content>
+    <Content Include="Silverlight.js" />
     <EmbeddedResource Include="WPF.py" />
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema.cd" />
-    <None Include="CodeEditor.html" />
-    <None Include="ScriptConsole.html" />
-    <None Include="StuntsIDE.html" />
+    <Content Include="CodeEditor.html" />
+    <Content Include="ScriptConsole.html" />
+    <Content Include="StuntsIDE.html" />
     <Content Include="edit_area\edit_area_full.js" />
     <Content Include="tabber.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
