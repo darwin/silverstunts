@@ -90,12 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Level.py" />
-    <Content Include="Page.py" />
-    <Content Include="SilverStunts.html" />
-    <Content Include="TestPage.html.js">
-      <DependentUpon>SilverStunts.html</DependentUpon>
-    </Content>
-    <Content Include="Silverlight.js" />
     <EmbeddedResource Include="WPF.py" />
   </ItemGroup>
   <ItemGroup>
@@ -113,11 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Gizmo.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CodeEditor.html" />
-    <Content Include="ScriptConsole.html" />
-    <Content Include="StuntsIDE.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Stats.xaml">
