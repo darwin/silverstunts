@@ -5,18 +5,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverStunts", "SilverStunt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Physics", "Physics\Physics.csproj", "{D863E4F9-D0B6-489C-866E-CDA3CDBAD21B}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "site", "..\..\site\", "{017496AA-BCF1-4890-B0C9-B74DE76823F1}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "site", "..\site\", "{017496AA-BCF1-4890-B0C9-B74DE76823F1}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
 		Debug.AspNetCompiler.VirtualPath = "/site"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\site\"
+		Debug.AspNetCompiler.PhysicalPath = "..\site\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\site\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/site"
-		Release.AspNetCompiler.PhysicalPath = "..\..\site\"
+		Release.AspNetCompiler.PhysicalPath = "..\site\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\site\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
