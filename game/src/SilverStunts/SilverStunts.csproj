@@ -115,16 +115,9 @@
     <EmbeddedResource Include="Gizmo.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Schema.cd" />
     <Content Include="CodeEditor.html" />
     <Content Include="ScriptConsole.html" />
     <Content Include="StuntsIDE.html" />
-    <Content Include="tabber.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="tabber.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Stats.xaml">

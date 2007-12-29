@@ -1,5 +1,4 @@
 // JScript source code
-
 function initSilverLightControl(sender, args)
 {
     sender.Content.page.PrintConsoleEvent = OnPrintConsole;
@@ -13,25 +12,19 @@ function initSilverLightControl(sender, args)
 //contains calls to silverlight.js, example below loads Page.xaml
 function createSilverlight(xaml, host, id)
 {
-/*
-	Silverlight.createObjectEx({
-		source: xaml,
-		parentElement: document.getElementById(host),
-		id: id,
-		properties: {
-			width: "100%",
-			height: "100%",
-			version: "0.95",
-			enableHtmlAccess: true
-		},
-		events: {
-		  onLoad: initSilverLightControl
-		}
-	});
-*/
-    Silverlight.createObject(xaml, document.getElementById(host), id,
-                                 {width:'100%', height:'100%',version:'1.1'/*,enableHtmlAccess: true*/},
-                                 { onLoad: initSilverLightControl
-                                 },
-                                 null);
+    Silverlight.createObject(
+        xaml, 
+        document.getElementById(host), 
+        id,
+        {
+            width:'100%', 
+            height:'100%',
+            version:'1.1'
+            //enableHtmlAccess: true
+        },
+        { 
+            onLoad: initSilverLightControl
+        },
+        null
+   );
 }
