@@ -69,7 +69,7 @@ namespace SilverStunts
 
         public string UrlResourceName(string cat, string item, string name)
         {
-            return /*"http://silverstunts.com/secret/" + */cat + "/" + item + "/" + name; // HACK
+            return cat + "/" + item + "/" + name;
         }
         
         public void AddItem(string item, string name)
