@@ -40,7 +40,7 @@ namespace Physics
 		private double coeffRest = 1f + 0.5f;
 		private double coeffFric = 0.01;		// Surface friction
 		private double coeffDamp = 0.99;		// Global damping
-        public int tick = 0;
+        private int tick = 0;
 
         //private IEnumerator<ISurface> surfaceEnumerator;
 		private Collection<IParticle> particles = new Collection<IParticle>();
@@ -86,11 +86,6 @@ namespace Physics
 			Verlet();
 			SatisfyConstraints();
 			CheckCollisions();
-
-            //foreach ( Particle particle in particles )
-            //{
-            //    particle.CheckIfChanged();
-            //}
 		}
 	
 	

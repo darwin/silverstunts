@@ -68,8 +68,13 @@ namespace SilverStunts
     public class Page
     {
         public static Page Current;
-        Canvas root;
-        const int MAX_LEVELS = 6;
+        Canvas content;
+        Canvas continueInfo;
+
+        public Game game;
+        public Stats stats;
+        public Help help;
+
         LevelDescriptor[] levels = { 
                                        new LevelDescriptor("uramp"), 
                                        new LevelDescriptor("cavanagh"), 
@@ -78,15 +83,12 @@ namespace SilverStunts
                                        new LevelDescriptor("hill"), 
                                        new LevelDescriptor("stairs") 
                                    };
-        int counter = 0;
         int currentLevel = 0;
-        public Game game;
-        public Stats stats;
-        public Help help;
-        Canvas continueInfo;
+
+        int counter = 0;
         
-        Timer gameLoop = new Timer();
-        Timer inputsLoop = new Timer();
+        Timer timer = new Timer();
+        Keyboard keyboard = new Keyboard();
 
         public Level level;
         public Level Level { get { return level;  } }
@@ -95,23 +97,16 @@ namespace SilverStunts
         int physicsTick;
         int inputTick;
         
-        bool[] keys = new bool[100];
-        bool[] platformKeys = new bool[256];
-
-        DateTime lastStatsTime = DateTime.Now;
-        DateTime levelTime;
-        DateTime deadTime;
+        DateTime deathTime;
         bool anyKeyRestart = false;
       
         public void Init(Canvas root)
         {
             Current = this;
-            this.root = root;
+            this.content = root;
 
             // register the scriptable endpoints
             WebApplication.Current.RegisterScriptableObject("page", this);
-
-            //timer = root.FindName("timer") as Storyboard;
             
             game = new Game(root);
             stats = new Stats(root);
@@ -130,19 +125,17 @@ namespace SilverStunts
 
             continueInfo = root.FindName("continue") as Canvas;
 
-            gameLoop.Attach(root, "game-loop", new Timer.TickDelegate(GameTick));
-            inputsLoop.Attach(root, "inputs-loop", new Timer.TickDelegate(InputsTick), TimeSpan.FromMilliseconds(1000));
+            timer.Attach(root, "game-loop", new Timer.TickDelegate(GameTick), new TimeSpan(TimeSpan.TicksPerSecond/120)); 
 
-            InitKeyboard(root);
+            keyboard.Init(root, new Keyboard.KeyEventDelegate(KeyPress));
 
             SwitchLevel(levels[currentLevel]);
         }
 
-        private void InitKeyboard(Canvas root)
+        void KeyPress(KeyboardEventArgs e, bool down)
         {
-            for (int i = 0; i < 100; i++) keys[i] = false;
-            root.KeyDown += OnKeyDown;
-            root.KeyUp += OnKeyUp;
+            if (down && HandleFrameworkKey(e)) return;
+            game.ProcessKey(e, down);
         }
 
         void ResetTicks()
@@ -150,20 +143,17 @@ namespace SilverStunts
             renderTick = 0;
             physicsTick = 0;
             inputTick = 0;
-            levelTime = DateTime.Now;
-            deadTime = DateTime.MaxValue;
+            deathTime = DateTime.MaxValue;
         }
 
         void StartTimers()
         {
-            gameLoop.Start();
-            inputsLoop.Start();
+            timer.Start();
         }
 
         void StopTimers()
         {
-            gameLoop.Stop();
-            inputsLoop.Stop();
+            timer.Stop();
         }
 
 
@@ -356,45 +346,11 @@ namespace SilverStunts
             return false;
         }
 
-        public void UpdateKeyState(KeyboardEventArgs e, bool press)
-        {
-            if (e.PlatformKeyCode <= 255)
-            {
-                platformKeys[e.PlatformKeyCode] = press;
-            }
-
-            if (e.Key <= 100)
-            {
-                keys[e.Key] = press;
-            }
-        }
-
-        public void OnKeyDown(Object o, KeyboardEventArgs e)
-        {
-            UpdateKeyState(e, true);
-            if (HandleFrameworkKey(e)) return;
-            game.ProcessKey(e, true);
-        }
-
-        public void OnKeyUp(Object o, KeyboardEventArgs e)
-        {
-            UpdateKeyState(e, false);
-            game.ProcessKey(e, false);
-        }
-
-        public void InputsTick(TimeSpan timeElapsed)
-        {
-            game.ProcessInputs(keys);
-            inputTick++;
-        }
-
         public void GameTick(TimeSpan timeElapsed)
         {
-            DateTime time = DateTime.Now;
-
             counter++;
 
-            game.ProcessInputs(keys);
+            game.ProcessInputs(keyboard.keys);
             inputTick++;
             game.Simulate();
             physicsTick++;
@@ -402,18 +358,20 @@ namespace SilverStunts
 
             if (counter % 2 == 0)
             {
-                level.UpdateBinders();
+                level.UpdateVisuals();
                 game.UpdateScrolling();
                 renderTick++;
             }
 
-            if (level.actor.IsDead() && deadTime == DateTime.MaxValue)
-            {
-                deadTime = time;
-            }
+            HandleContinueMessage();
+        }
 
-            // little hack - show "continue" screen
-            if (!game.editor.Active && level.actor.IsDead() && (time - deadTime).TotalMilliseconds > 1500)
+        private void HandleContinueMessage()
+        {
+            // show "continue" screen if needed
+            DateTime time = DateTime.Now;
+            if (level.actor.IsDead() && deathTime == DateTime.MaxValue) deathTime = time;
+            if (!game.editor.Active && level.actor.IsDead() && (time - deathTime).TotalMilliseconds > 1500)
             {
                 continueInfo.Visibility = Visibility.Visible;
                 anyKeyRestart = true;

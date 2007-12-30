@@ -38,7 +38,7 @@ namespace SilverStunts
             content = (ClipCanvas)this.InitializeFromXaml(new StreamReader(s).ReadToEnd());
 
             pageStats = content.FindName("pageStats") as TextBlock;
-            statsTimer.Attach(content, "stats-timer", new Timer.TickDelegate(Tick), TimeSpan.FromMilliseconds(500));
+            statsTimer.Attach(content, "stats-timer", new Timer.TickDelegate(Tick), new TimeSpan(TimeSpan.TicksPerSecond/2));
 
             content.UpdateLayout();
         }
@@ -59,7 +59,7 @@ namespace SilverStunts
 
             // build stats string
             StringBuilder s = new StringBuilder();
-            s.AppendLine(String.Format("Page: FPS = {0:00.00} RenderTick={1:000000}", fps, page.renderTick));
+            s.AppendLine(String.Format("\nPage: FPS = {0:00.00} RenderTick={1:000000}", fps, page.renderTick));
             s.AppendLine(page.level.GetStats());
             s.AppendLine(page.game.GetStats());
             s.AppendLine(page.level.physics.GetStats());

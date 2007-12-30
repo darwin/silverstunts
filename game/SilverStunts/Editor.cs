@@ -52,7 +52,7 @@ namespace SilverStunts
 
         public bool Active { get; set; }
 
-        Visual binderToBeSelected;
+        Visual visualToBeSelected;
 
         public Editor(Game game)
         {
@@ -357,47 +357,47 @@ namespace SilverStunts
             }
         }
 
-        public void InitAdditionalGizmos(Visual binder)
+        public void InitAdditionalGizmos(Visual visual)
         {
-            if (binder == null) return;
+            if (visual == null) return;
 
-            if (binder.source is RectangleSurface)
+            if (visual.source is RectangleSurface)
             {
-                currentGizmos.Add(new RectangleResizeTLGizmo(this, binder));
-                currentGizmos.Add(new RectangleResizeTRGizmo(this, binder));
-                currentGizmos.Add(new RectangleResizeBRGizmo(this, binder));
-                currentGizmos.Add(new RectangleResizeBLGizmo(this, binder));
+                currentGizmos.Add(new RectangleResizeTLGizmo(this, visual));
+                currentGizmos.Add(new RectangleResizeTRGizmo(this, visual));
+                currentGizmos.Add(new RectangleResizeBRGizmo(this, visual));
+                currentGizmos.Add(new RectangleResizeBLGizmo(this, visual));
             }
-            if (binder.source is CircleSurface)
+            if (visual.source is CircleSurface)
             {
-                currentGizmos.Add(new CircleRadiusGizmo(this, binder));
+                currentGizmos.Add(new CircleRadiusGizmo(this, visual));
             }
-            if (binder.source is LineSurface)
+            if (visual.source is LineSurface)
             {
-                currentGizmos.Add(new LineSurfaceH1Gizmo(this, binder));
-                currentGizmos.Add(new LineSurfaceH2Gizmo(this, binder));
+                currentGizmos.Add(new LineSurfaceH1Gizmo(this, visual));
+                currentGizmos.Add(new LineSurfaceH2Gizmo(this, visual));
             }
         }
 
-        public IGizmo InitMainGizmo(Visual binder)
+        public IGizmo InitMainGizmo(Visual visual)
         {
-            if (binder == null) return null;
+            if (visual == null) return null;
 
             IGizmo gizmo = null;
-            if (binder.source is RectangleSurface)
+            if (visual.source is RectangleSurface)
             {
-                gizmo = new RectangleMoveGizmo(this, binder);
+                gizmo = new RectangleMoveGizmo(this, visual);
             }
-            if (binder.source is CircleSurface)
+            if (visual.source is CircleSurface)
             {
-                gizmo = new CircleMoveGizmo(this, binder);
+                gizmo = new CircleMoveGizmo(this, visual);
             }
-            if (binder.source is LineSurface)
+            if (visual.source is LineSurface)
             {
-                gizmo = new LineSurfaceMoveGizmo(this, binder);
+                gizmo = new LineSurfaceMoveGizmo(this, visual);
             }
 
-            if (gizmo == null) throw new Exception("Unsupported binder source");
+            if (gizmo == null) throw new Exception("Unsupported visual source");
 
             currentGizmos.Add(gizmo);
             dragGizmos.Add(gizmo);
@@ -461,7 +461,7 @@ namespace SilverStunts
 
         public void CopyObjectUnderGizmo(MoveGizmo gizmo, double shiftx, double shifty)
         {
-            binderToBeSelected = null;
+            visualToBeSelected = null;
             game.level.OnEntityCreated += new EventHandler<EntityCreatedArgs>(level_OnEntityCreated);
 
             if (gizmo.editable is RectangleSurface)
@@ -491,24 +491,24 @@ namespace SilverStunts
 
             game.level.OnEntityCreated -= new EventHandler<EntityCreatedArgs>(level_OnEntityCreated);
 
-            if (binderToBeSelected != null)
+            if (visualToBeSelected != null)
             {
-                InitMainGizmo(binderToBeSelected);
-                InitAdditionalGizmos(binderToBeSelected);
-                binderToBeSelected = null;
+                InitMainGizmo(visualToBeSelected);
+                InitAdditionalGizmos(visualToBeSelected);
+                visualToBeSelected = null;
             }
         }
 
         void level_OnEntityCreated(object sender, EntityCreatedArgs e)
         {
-            binderToBeSelected = e.binder;
+            visualToBeSelected = e.visual;
         }
 
         public void DeleteObject(MoveGizmo gizmo)
         {
-            game.level.EvalExpression(String.Format("del {0}", gizmo.binder.source.name));
-            game.level.EntityDestroyed(gizmo.binder);
-            game.level.RemoveEntitiesSource(String.Format("{0} = \\w+\\(.*\\)", gizmo.binder.source.name));
+            game.level.EvalExpression(String.Format("del {0}", gizmo.visual.source.name));
+            game.level.EntityDestroyed(gizmo.visual);
+            game.level.RemoveEntitiesSource(String.Format("{0} = \\w+\\(.*\\)", gizmo.visual.source.name));
         }
 
         public void ProcessInputs(bool[] keys)

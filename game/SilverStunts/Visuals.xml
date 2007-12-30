@@ -1,4 +1,4 @@
-﻿<VisualDefinitions>
+﻿<Visuals>
 
   <Visual Type="Wheel">
     <Canvas.RenderTransform>
@@ -94,4 +94,4 @@
     <Line X1="{P1.X}" Y1="{P1.Y}" X2="{P2.X}" Y2="{P2.Y}" Stroke="Green" StrokeThickness="4"/>
   </Visual>
 
-</VisualDefinitions>
+</Visuals>

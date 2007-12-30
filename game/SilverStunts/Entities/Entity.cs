@@ -13,8 +13,8 @@ namespace SilverStunts.Entities
 {
     public class Entity
     {
-        public Canvas xaml { get { return _binder.content; } }
-        public string name { get { return _binder.source.name; } }
+        public Canvas xaml { get { return _visual.content; } }
+        public string name { get { return _visual.source.name; } }
         public string type { 
             get {
                 string s = GetType().FullName;
@@ -22,16 +22,16 @@ namespace SilverStunts.Entities
             } 
         }
 
-        protected Visual _binder;
+        protected Visual _visual;
 
         protected void Born()
         {
-            Page.Current.Level.EntityCreated(this, _binder);
+            Page.Current.Level.EntityCreated(this, _visual);
         }
 
         protected void Die()
         {
-            Page.Current.Level.EntityDestroyed(_binder);
+            Page.Current.Level.EntityDestroyed(_visual);
         }
 
         public void Destroy()

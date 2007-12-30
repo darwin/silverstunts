@@ -41,15 +41,15 @@ namespace SilverStunts
         public Canvas content;
         public Family family;
         public string selector;
-        BindingTable bindingTable;
+        BindingTable bindings;
 
-        class BindingDescriptor
+        class Binding
         {
             int id;
             string attribute;
             string field;
 
-            public BindingDescriptor(int id, string attribute, string field)
+            public Binding(int id, string attribute, string field)
             {
                 this.id = id;
                 this.attribute = attribute;
@@ -96,7 +96,7 @@ namespace SilverStunts
 
             public void Update(Canvas content, Object source)
             {
-                // HACK: update opacity
+                // HACK: update opacity for gizmos
                 if (source is AbstractSurface)
                 {
                     AbstractSurface tile = (AbstractSurface)source;
@@ -110,7 +110,7 @@ namespace SilverStunts
             }
         }
 
-        class BindingTable : List<BindingDescriptor>
+        class BindingTable : List<Binding>
         {
             int counter = 0;
 
@@ -131,7 +131,7 @@ namespace SilverStunts
             this.family = type;
             this.selector = selector;
 
-            System.IO.Stream stream = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.Visuals.xaml");
+            System.IO.Stream stream = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.Visuals.xml");
             XmlReader reader = XmlReader.Create(stream);
 
             reader.ReadToFollowing("Visual");
@@ -152,22 +152,14 @@ namespace SilverStunts
 
         void ProcessNode(XmlReader reader, XmlWriter writer, BindingTable bindingTable, RenderMode mode)
         {
-            if (reader == null)
-            {
-                throw new ArgumentNullException("reader");
-            }
-
-            if (writer == null)
-            {
-                throw new ArgumentNullException("writer");
-            }
+            if (reader == null) throw new ArgumentNullException("reader");
+            if (writer == null) throw new ArgumentNullException("writer");
 
             switch (reader.NodeType)
             {
                 case XmlNodeType.Element:
                     bindingTable.NewElement();
                     writer.WriteStartElement(reader.Prefix, reader.LocalName, reader.NamespaceURI);
-                    //Debug.WriteLine("Element : {0}", reader.Name);
                     
                     if (reader.HasAttributes)
                     {
@@ -188,7 +180,7 @@ namespace SilverStunts
                             if (value.StartsWith("{"))
                             {
                                 string field = value.Substring(1, value.Length - 2);
-                                BindingDescriptor d = new BindingDescriptor(bindingTable.CurrentId, name, field);
+                                Binding d = new Binding(bindingTable.CurrentId, name, field);
                                 Object val = d.GetValue(source);
                                 if (val is Double)
                                 {
@@ -252,22 +244,19 @@ namespace SilverStunts
 
         public string RenderXAML()
         {
-            System.IO.Stream stream = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.Binder.xaml");
+            System.IO.Stream stream = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.Visuals.xml");
             XmlReader reader = XmlReader.Create(stream);
 
-            reader.ReadToFollowing("Binder");
+            reader.ReadToFollowing("Visual");
             do
             {
                 string c = source.GetType().FullName;
                 int lastDot = c.LastIndexOf('.');
                 c = c.Substring(lastDot + 1);
 
-                if (reader.GetAttribute("Type") == c)
-                {
-                    return RenderXAML(reader.ReadSubtree(), RenderMode.Output);
-                }
+                if (reader.GetAttribute("Type") == c) return RenderXAML(reader.ReadSubtree(), RenderMode.Output);
             }
-            while (reader.ReadToNextSibling("Binder"));
+            while (reader.ReadToNextSibling("Visual"));
             return "";
         }
 
@@ -285,7 +274,7 @@ namespace SilverStunts
             while (reader.Read())
             {
                 writer.Flush(); // HACK
-                if (reader.Depth > 0) ProcessNode(reader, writer, bindingTable, mode);
+                if (reader.Depth > 0) ProcessNode(reader, writer, bindings, mode);
             }
             writer.Flush();
             writer.Close();
@@ -304,17 +293,17 @@ namespace SilverStunts
 
         private void Initialize(XmlReader reader)
         {
-            bindingTable = new BindingTable();
+            bindings = new BindingTable();
             string markup = RenderXAML(reader, RenderMode.Init);
             content = (Canvas)this.InitializeFromXaml(markup);
         }
 
         public void Update()
         {
-            // process binding table
-            foreach (BindingDescriptor descriptor in bindingTable)
+            // process bindings in the table
+            foreach (Binding binding in bindings)
             {
-                descriptor.Update(content, source);
+                binding.Update(content, source);
             }
         }
     }

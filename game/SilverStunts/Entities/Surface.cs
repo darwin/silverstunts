@@ -17,14 +17,14 @@ namespace SilverStunts.Entities
     {
         public event EventHandler onContact
         {
-            add { (_binder.source as AbstractSurface).Contact += value; }
-            remove { (_binder.source as AbstractSurface).Contact -= value; }
+            add { (_visual.source as AbstractSurface).Contact += value; }
+            remove { (_visual.source as AbstractSurface).Contact -= value; }
         }
 
         public bool active
         {
-            get { return (_binder.source as ISurface).Active; }
-            set { (_binder.source as ISurface).Active = value; }
+            get { return (_visual.source as ISurface).Active; }
+            set { (_visual.source as ISurface).Active = value; }
         }
     }
 }

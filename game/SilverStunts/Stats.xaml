@@ -7,13 +7,12 @@
         Visibility = "Collapsed"
         >
 
-    <Canvas Canvas.Left="0" Canvas.Top="0" Width="1000" Height="64" Background="#444444" Opacity="0.3">
+    <Canvas Canvas.Left="0" Canvas.Top="0" Width="1000" Height="80" Background="#444444" Opacity="0.3">
       <TextBlock x:Name="pageStats" Foreground="Yellow" FontFamily="Monospace" FontWeight="Bold"  FontSize="10">
         <TextBlock.RenderTransform>
           <TranslateTransform X="2" Y="0"/>
         </TextBlock.RenderTransform>
       </TextBlock>
     </Canvas>
-        
 
 </ss:ClipCanvas>

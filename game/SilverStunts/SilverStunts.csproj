@@ -66,6 +66,7 @@
     <Compile Include="Interfaces\IGizmo.cs" />
     <Compile Include="Interfaces\IActor.cs" />
     <Compile Include="Interfaces\IProgressBar.cs" />
+    <Compile Include="Keyboard.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelDescriptor.cs" />
@@ -113,9 +114,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Visuals.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Visuals.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\Silverlight\Microsoft.Silverlight.Csharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -43,7 +43,6 @@ namespace SilverStunts
         protected SpringConstraint sBodyToLegs;
         protected AngularConstraint aPose;
 
-        int jumpTimeout = 0;
         int airTimeout = 0;
         Vector jumpImpulse = new Vector(0, 0);
         double jumpCharge = 0;
@@ -89,7 +88,7 @@ namespace SilverStunts
         {
             foreach (Generic e in parts)
             {
-                if (ReferenceEquals(e.binder.source, o))
+                if (ReferenceEquals(e.visual.source, o))
                 {
                     e.Destroy();
                     parts.Remove(e);
@@ -121,8 +120,7 @@ namespace SilverStunts
         public void ProcessInputs(bool[] keys)
         {
             if (personHead.Curr.Y >= 1000) Kill();
-            double keySpeed = 0.05;
-            if (jumpTimeout > 0) jumpTimeout--;
+            double keySpeed = 0.2;
             if (IsDead())
             {
                 wheelA.RP.Decelerate(keySpeed);
@@ -174,7 +172,7 @@ namespace SilverStunts
                 secondaryWheel = wheelA;
             }
 
-            if (physics.tick == primaryWheel.lastJumpNormalTick)
+            if (primaryWheel.lastNormal!=null)
             {
                 airTimeout = 0;
                 if (keyStunt)
@@ -185,7 +183,7 @@ namespace SilverStunts
                     personHead.Curr.X += dirX;
                 }
             }
-            else if (physics.tick == secondaryWheel.lastJumpNormalTick)
+            else if (secondaryWheel.lastNormal!=null)
             {
                 airTimeout = 0;
                 if (keyStunt)
@@ -235,34 +233,30 @@ namespace SilverStunts
                     }
                 }
             }
-
+            
             if (jumpCharge > 0 && !keyJump)
             {
-                //if (jumpTimeout == 0)
+                if (primaryWheel.lastNormal != null)// && (physics.tick - primaryWheel.lastlastNormalTick) < 2)
                 {
-                    if (primaryWheel.jumpNormal != null && (physics.tick - primaryWheel.lastJumpNormalTick) < 2)
-                    {
-                        Vector n = primaryWheel.jumpNormal;
-                        jumpTimeout = 5;
+                    Vector n = primaryWheel.lastNormal;
 
-                        jumpImpulse.X = n.X * jumpCharge;
-                        jumpImpulse.Y = n.Y * jumpCharge;
-                    }
+                    jumpImpulse.X = n.X * jumpCharge;
+                    jumpImpulse.Y = n.Y * jumpCharge;
                 }
                 jumpCharge = 0;
             }
-
+            
             if (keyJump)
             {
-                if (primaryWheel.jumpNormal != null)
+                if (primaryWheel.lastNormal != null)
                 {
                     if (jumpCharge == 0) jumpCharge = 8; // initial charge
                     if (jumpCharge < 25) jumpCharge += 0.5;
 
-                    personBody.Curr.Y -= primaryWheel.jumpNormal.Y * jumpCharge * 0.1;
-                    personHead.Curr.Y -= primaryWheel.jumpNormal.Y * jumpCharge * 0.1;
-                    personBody.Curr.X -= primaryWheel.jumpNormal.X * jumpCharge * 0.1;
-                    personHead.Curr.X -= primaryWheel.jumpNormal.X * jumpCharge * 0.1;
+                    personBody.Curr.Y -= primaryWheel.lastNormal.Y * jumpCharge * 0.1;
+                    personHead.Curr.Y -= primaryWheel.lastNormal.Y * jumpCharge * 0.1;
+                    personBody.Curr.X -= primaryWheel.lastNormal.X * jumpCharge * 0.1;
+                    personHead.Curr.X -= primaryWheel.lastNormal.X * jumpCharge * 0.1;
                     personHead.Curr.X += dirX;
                     personBody.Curr.X -= dirX;
                 }
@@ -285,6 +279,9 @@ namespace SilverStunts
 
             if (keyLeft) lastRight = false;
             if (keyRight) lastRight = true;
+
+            primaryWheel.lastNormal = null;
+            secondaryWheel.lastNormal = null;
         }
 
         public void Kill()

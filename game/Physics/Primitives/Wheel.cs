@@ -34,8 +34,7 @@ namespace Physics.Primitives
 	{
 		private RimParticle rp;
 		private double coeffSlip;
-        public Vector jumpNormal;
-        public int lastJumpNormalTick = 0;
+        public Vector lastNormal;
 
 		public Wheel( double x, double y, double r ) : base( x, y, r )
 		{
@@ -57,10 +56,9 @@ namespace Physics.Primitives
 
 		public override Vector ResolveCollision( Vector normal, Engine engine )
 		{
-			Vector velocity = base.ResolveCollision( normal, engine );
-			Resolve( normal );
-            lastJumpNormalTick = engine.tick;
-            jumpNormal = normal;
+			Vector velocity = base.ResolveCollision(normal, engine);
+			Resolve(normal);
+            lastNormal = normal;
 			return velocity;
 		}
 

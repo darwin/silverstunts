@@ -1,4 +1,6 @@
-﻿import sys
+﻿# purpose of this file is to define shortcuts for some game objects in Python
+
+import sys
 import clr
 ss = clr.LoadAssemblyByName("SilverStunts, Version=1.0.0.0")
 
