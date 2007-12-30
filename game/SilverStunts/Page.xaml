@@ -6,7 +6,7 @@
         Background="Black"
         >
 
-  <x:Code Source="Page.py" Type="text/ironpython" />
+  <x:Code Source="page.py" Type="text/ironpython" />
 
   <Canvas x:Name="loader" Loaded="onLoaded" />
 
