@@ -33,7 +33,7 @@ namespace SilverStunts.Entities
         public Circle(double x, double y, double r)
         {
             CircleSurface circle = new CircleSurface(x, y, r);
-            _binder = new Binder(circle, Binder.Family.Circle, null);
+            _binder = new Visual(circle, Visual.Family.Circle, null);
 
             Born();
         }

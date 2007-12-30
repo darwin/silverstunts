@@ -13,11 +13,11 @@ namespace SilverStunts.Entities
 {
     public class Generic : Entity
     {
-        public Binder binder { get { return _binder; } }
+        public Visual binder { get { return _binder; } }
 
-        public Generic(PhysicsObject source, Binder.Family family, string selector)
+        public Generic(PhysicsObject source, Visual.Family family, string selector)
         {
-            _binder = new Binder(source, family, selector);
+            _binder = new Visual(source, family, selector);
 
             Born();
         }

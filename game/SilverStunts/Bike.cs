@@ -74,7 +74,7 @@ namespace SilverStunts
 
         public Generic Add(PhysicsObject o, string selector)
         {
-            Generic g = new Generic(o, Binder.Family.Bike, selector);
+            Generic g = new Generic(o, Visual.Family.Bike, selector);
             parts.Add(g);
             return g;
         }

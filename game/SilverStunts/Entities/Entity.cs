@@ -22,7 +22,7 @@ namespace SilverStunts.Entities
             } 
         }
 
-        protected Binder _binder;
+        protected Visual _binder;
 
         protected void Born()
         {

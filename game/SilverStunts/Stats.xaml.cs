@@ -9,53 +9,63 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Windows.Browser;
+using System.Text;
 
 namespace SilverStunts
 {
     public class Stats : Control
     {
         public ClipCanvas content;
-        HtmlTimer htmlTimer;
         
         public bool Visible
         { 
             get {
-                if (htmlTimer == null) timer.Begin(); else if (!htmlTimer.Enabled) htmlTimer.Start();
                 return content.Visibility == Visibility.Visible; 
             } 
             set {
-                content.Visibility = value ? Visibility.Visible : Visibility.Collapsed; 
+                if (value) statsTimer.Start(); else statsTimer.Stop();
+                content.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
             } 
         }
 
-        Storyboard timer;
+        Timer statsTimer = new Timer();
         TextBlock pageStats;
+        int lastRenderTick = 0;
 
-        public Stats()
+        public Stats(Canvas parent)
         {
             Stream s = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.Stats.xaml");
             content = (ClipCanvas)this.InitializeFromXaml(new StreamReader(s).ReadToEnd());
 
-            UseHTMLTimer();
-
-            timer = content.FindName("timer") as Storyboard;
             pageStats = content.FindName("pageStats") as TextBlock;
+            statsTimer.Attach(content, "stats-timer", new Timer.TickDelegate(Tick), TimeSpan.FromMilliseconds(500));
 
             content.UpdateLayout();
         }
 
-        void UseHTMLTimer()
+        public void Tick(TimeSpan elapsedTime)
         {
-            htmlTimer = new HtmlTimer();
-            htmlTimer.Interval = 1000;
-            htmlTimer.Tick += new EventHandler(Tick);
+            pageStats.Text = BuildStats(elapsedTime);
         }
 
-        public void Tick(object sender, EventArgs e)
+        string BuildStats(TimeSpan elapsedTime)
         {
-            pageStats.Text = Page.Current.GetStats();
-            if (htmlTimer==null) timer.Begin();
-            else if (!htmlTimer.Enabled) htmlTimer.Start();
+            Page page = Page.Current;
+
+            // compute FPS
+            double elapsedSeconds = elapsedTime.TotalMilliseconds / 1000.0f;
+            double fps = (page.renderTick - lastRenderTick) / elapsedSeconds;
+            lastRenderTick = page.renderTick;
+
+            // build stats string
+            StringBuilder s = new StringBuilder();
+            s.AppendLine(String.Format("Page: FPS = {0:00.00} RenderTick={1:000000}", fps, page.renderTick));
+            s.AppendLine(page.level.GetStats());
+            s.AppendLine(page.game.GetStats());
+            s.AppendLine(page.level.physics.GetStats());
+
+            return s.ToString();
         }
+
     }
 }

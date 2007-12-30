@@ -19,7 +19,7 @@ using Physics.Surfaces;
 
 namespace SilverStunts
 {
-    public class Binder : Control
+    public class Visual : Control
     {
         public enum Family
         {
@@ -125,16 +125,16 @@ namespace SilverStunts
             }
         }
 
-        public Binder(PhysicsObject o, Family type, string selector)
+        public Visual(PhysicsObject o, Family type, string selector)
         {
             this.source = o;
             this.family = type;
             this.selector = selector;
 
-            System.IO.Stream stream = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.Binder.xaml");
+            System.IO.Stream stream = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.Visuals.xaml");
             XmlReader reader = XmlReader.Create(stream);
 
-            reader.ReadToFollowing("Binder");
+            reader.ReadToFollowing("Visual");
             do
             {
                 string c = source.GetType().FullName;
@@ -147,7 +147,7 @@ namespace SilverStunts
                     break;
                 }
             }
-            while (reader.ReadToNextSibling("Binder"));
+            while (reader.ReadToNextSibling("Visual"));
         }
 
         void ProcessNode(XmlReader reader, XmlWriter writer, BindingTable bindingTable, RenderMode mode)
@@ -312,9 +312,9 @@ namespace SilverStunts
         public void Update()
         {
             // process binding table
-            foreach (BindingDescriptor d in bindingTable)
+            foreach (BindingDescriptor descriptor in bindingTable)
             {
-                d.Update(content, source);
+                descriptor.Update(content, source);
             }
         }
     }

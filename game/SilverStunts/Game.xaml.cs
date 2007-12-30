@@ -40,7 +40,7 @@ namespace SilverStunts
         public Canvas background;
         public bool simulationEnabled = false;
                 
-        public Game()
+        public Game(Canvas parent)
         {
             Stream s = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.Game.xaml");
             content = this.InitializeFromXaml(new StreamReader(s).ReadToEnd()) as ClipCanvas;
@@ -128,7 +128,7 @@ namespace SilverStunts
             {
                 // game handles scrolling
                 Vector apos = level.actor.GetPos();
-                Vector dx= new Vector(apos.X - cameraX, apos.Y - cameraY);
+                Vector dx = new Vector(apos.X - cameraX, apos.Y - cameraY);
 
                 double mag = dx.Magnitude();
                 if (mag > 400) dx.Mult(400 / mag);
@@ -143,23 +143,21 @@ namespace SilverStunts
             }
         }
 
-        public Binder PickSurface(double x, double y)
-        {
-            return level.PickSurface(x, y);
-        }
-
         internal string GetStats()
         {
-            
             return String.Format("Game: CamX={0:0000} CamY={1:0000} World=#{2:0000}",
                 cameraX,
                 cameraY,
                 world.Children.Count
-                );
-
+            );
         }
 
-        internal List<Binder> PickSurfaces(double x, double y, double w, double h)
+        public Visual PickSurface(double x, double y)
+        {
+            return level.PickSurface(x, y);
+        }
+
+        internal List<Visual> PickSurfaces(double x, double y, double w, double h)
         {
             return level.PickSurfaces(x, y, w, h);
         }

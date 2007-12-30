@@ -38,7 +38,7 @@ namespace SilverStunts.Entities
         public Rectangle(double x, double y, double w, double h)
         {
             RectangleSurface rectangle = new RectangleSurface(x, y, w, h);
-            _binder = new Binder(rectangle, Binder.Family.Rectangle, null);
+            _binder = new Visual(rectangle, Visual.Family.Rectangle, null);
 
             Born();
         }

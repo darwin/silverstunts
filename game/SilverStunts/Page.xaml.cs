@@ -26,6 +26,7 @@ using System.Text;
 
 namespace SilverStunts
 {
+    #region Support classes for scripting
     [Scriptable]
     public class PrintConsoleEventArgs : EventArgs
     {
@@ -61,6 +62,7 @@ namespace SilverStunts
             this.source = source;
         }
     }
+    #endregion
 
     [Scriptable]
     public class Page
@@ -78,19 +80,18 @@ namespace SilverStunts
                                    };
         int counter = 0;
         int currentLevel = 0;
-        bool inTick = false;
         public Game game;
         public Stats stats;
         public Help help;
-        Canvas topline;
-        Canvas bottomline;
         Canvas continueInfo;
-        Storyboard timer;
-        HtmlTimer htmlTimer;
+        
+        Timer gameLoop = new Timer();
+        Timer inputsLoop = new Timer();
+
         public Level level;
         public Level Level { get { return level;  } }
 
-        int renderTick;
+        public int renderTick;
         int physicsTick;
         int inputTick;
         
@@ -100,23 +101,21 @@ namespace SilverStunts
         DateTime lastStatsTime = DateTime.Now;
         DateTime levelTime;
         DateTime deadTime;
-        int lastStatsRenderTick = 0;
         bool anyKeyRestart = false;
       
         public void Init(Canvas root)
         {
             Current = this;
             this.root = root;
-            UseHTMLTimer();
 
             // register the scriptable endpoints
             WebApplication.Current.RegisterScriptableObject("page", this);
 
-            timer = root.FindName("timer") as Storyboard;
+            //timer = root.FindName("timer") as Storyboard;
             
-            game = new Game();
-            stats = new Stats();
-            help = new Help();
+            game = new Game(root);
+            stats = new Stats(root);
+            help = new Help(root);
 
             level = new Level("__empty__", game.world, game.foreground, game.background);
 
@@ -129,9 +128,10 @@ namespace SilverStunts
             Canvas helphost = root.FindName("helphost") as Canvas;
             helphost.Children.Add(help);
 
-            topline = root.FindName("topline") as Canvas;
-            bottomline = root.FindName("bottomline") as Canvas;
             continueInfo = root.FindName("continue") as Canvas;
+
+            gameLoop.Attach(root, "game-loop", new Timer.TickDelegate(GameTick));
+            inputsLoop.Attach(root, "inputs-loop", new Timer.TickDelegate(InputsTick), TimeSpan.FromMilliseconds(1000));
 
             InitKeyboard(root);
 
@@ -150,116 +150,22 @@ namespace SilverStunts
             renderTick = 0;
             physicsTick = 0;
             inputTick = 0;
-            lastStatsRenderTick = 0;
             levelTime = DateTime.Now;
             deadTime = DateTime.MaxValue;
         }
 
-        void StartTimer()
+        void StartTimers()
         {
-            if (htmlTimer!=null)        
-            {
-                if (!htmlTimer.Enabled) htmlTimer.Start();
-                return;
-            }
-            timer.Begin();
+            gameLoop.Start();
+            inputsLoop.Start();
         }
 
-        void StopTimer()
+        void StopTimers()
         {
-            if (htmlTimer!=null)        
-            {
-                htmlTimer.Stop();
-                return;
-            }
-            timer.Stop();
+            gameLoop.Stop();
+            inputsLoop.Stop();
         }
 
-        void UseHTMLTimer()
-        {
-            htmlTimer = new HtmlTimer();
-            htmlTimer.Interval = 30;
-            htmlTimer.Tick += new EventHandler(Tick);
-        }
-
-        #region Scriptable interface
-
-        [Scriptable]
-        public event EventHandler PrintConsoleEvent;
-        [Scriptable]
-        public event EventHandler ShowWorldXAMLEvent;
-        [Scriptable]
-        public event EventHandler RequestEntitiesSourceEvent;
-        [Scriptable]
-        public event EventHandler PublishEntitiesSourceEvent;
-        [Scriptable]
-        public event EventHandler OpenScriptEditorEvent;
-        [Scriptable]
-        public event EventHandler UpdateIDEEvent;
-
-        [Scriptable]
-        public bool EvalExpression(string line, bool force)
-        {
-            return level.EvalExpression(line, force);
-        }
-
-        [Scriptable]
-        public bool EvalEntities(string code)
-        {
-            level.EntitiesSource = code;
-            RestartLevel();
-            return true;
-        }
-
-        [Scriptable]
-        public bool EvalLogic(string code)
-        {
-            level.LogicSource = code;
-            RestartLevel();
-            return true;
-        }
-
-        [Scriptable]
-        public string GetEntitiesSource()
-        {
-            return level.EntitiesSource;
-        }
-
-        [Scriptable]
-        public string GetLogicSource()
-        {
-            return level.LogicSource;
-        }
-
-        [Scriptable]
-        public string GetForegroundSource()
-        {
-            return level.ForegroundSource;
-        }
-
-        [Scriptable]
-        public string GetBackgroundSource()
-        {
-            return level.BackgroundSource;
-        }
-
-        [Scriptable]
-        public bool EvalForeground(string xaml)
-        {
-            level.ForegroundSource = xaml;
-            RestartLevel();
-            return true;
-        }
-
-        [Scriptable]
-        public bool EvalBackground(string xaml)
-        {
-            level.BackgroundSource = xaml;
-            RestartLevel();
-            return true;
-        }
-
-        #endregion
 
         public enum ConsoleOutputKind
         {
@@ -354,8 +260,7 @@ namespace SilverStunts
 
         public void SwitchLevel(LevelDescriptor ld)
         {
-            StopTimer();
-            while (inTick) { }
+            StopTimers();
             game.DisableSimulation();
             level.Clear();
 
@@ -378,7 +283,7 @@ namespace SilverStunts
             RestartLevel();
             UpdateIDE();
 
-            StartTimer();
+            StartTimers();
         }
 
         public void RestartLevel()
@@ -419,15 +324,12 @@ namespace SilverStunts
 
             if (e.Key == 9) // SPACE
             {
-                //ImageBrush ib = (ImageBrush)root.FindName("top");
                 if (game.editor.Active)
                 {
-                    //ib.ImageSource = new Uri("Graphics/01.png", UriKind.Relative);
                     game.DisableEditor();
                 }
                 else
                 {
-                    //ib.ImageSource = new Uri("Graphics/02.png", UriKind.Relative);
                     game.EnableEditor();
                 }
                 return true;
@@ -442,7 +344,6 @@ namespace SilverStunts
             if (e.Key == 57) // F2
             {
                 stats.Visible = !stats.Visible;
-                topline.Visibility = !stats.Visible ? Visibility.Visible : Visibility.Collapsed;
                 return true;
             }
 
@@ -481,20 +382,23 @@ namespace SilverStunts
             game.ProcessKey(e, false);
         }
 
-        public void Tick(object sender, EventArgs e)
+        public void InputsTick(TimeSpan timeElapsed)
         {
-            inTick = true;
+            game.ProcessInputs(keys);
+            inputTick++;
+        }
 
+        public void GameTick(TimeSpan timeElapsed)
+        {
             DateTime time = DateTime.Now;
-            TimeSpan span = time - lastStatsTime;
-            
+
             counter++;
 
             game.ProcessInputs(keys);
             inputTick++;
             game.Simulate();
             physicsTick++;
-            level.Tick(physicsTick, (int)span.TotalMilliseconds);
+            level.Tick(physicsTick, (int)timeElapsed.TotalMilliseconds);
 
             if (counter % 2 == 0)
             {
@@ -503,7 +407,6 @@ namespace SilverStunts
                 renderTick++;
             }
 
-            inTick = false;
             if (level.actor.IsDead() && deadTime == DateTime.MaxValue)
             {
                 deadTime = time;
@@ -520,25 +423,85 @@ namespace SilverStunts
                 continueInfo.Visibility = Visibility.Collapsed;
                 anyKeyRestart = false;
             }
-            StartTimer();
         }
 
-        internal string GetStats()
+        #region Scriptable interface
+
+        [Scriptable]
+        public event EventHandler PrintConsoleEvent;
+        [Scriptable]
+        public event EventHandler ShowWorldXAMLEvent;
+        [Scriptable]
+        public event EventHandler RequestEntitiesSourceEvent;
+        [Scriptable]
+        public event EventHandler PublishEntitiesSourceEvent;
+        [Scriptable]
+        public event EventHandler OpenScriptEditorEvent;
+        [Scriptable]
+        public event EventHandler UpdateIDEEvent;
+
+        [Scriptable]
+        public bool EvalExpression(string line, bool force)
         {
-            DateTime time = DateTime.Now;
-            TimeSpan span = time - lastStatsTime;
-            StringBuilder s = new StringBuilder();
-            
-            double elapsed = span.TotalMilliseconds / 1000.0f;
-            double fps = (renderTick - lastStatsRenderTick) / elapsed;
-            s.AppendLine(String.Format("Page: FPS = {0:00.00} RenderTick={1:000000} InputTick={2:000000} PhysicsTick={3:000000}", fps, renderTick, inputTick, physicsTick));
-            s.AppendLine(level.GetStats());
-            s.AppendLine(game.GetStats());
-            s.AppendLine(level.physics.GetStats());
-
-            lastStatsRenderTick = renderTick;
-            lastStatsTime = time;
-            return s.ToString();
+            return level.EvalExpression(line, force);
         }
+
+        [Scriptable]
+        public bool EvalEntities(string code)
+        {
+            level.EntitiesSource = code;
+            RestartLevel();
+            return true;
+        }
+
+        [Scriptable]
+        public bool EvalLogic(string code)
+        {
+            level.LogicSource = code;
+            RestartLevel();
+            return true;
+        }
+
+        [Scriptable]
+        public string GetEntitiesSource()
+        {
+            return level.EntitiesSource;
+        }
+
+        [Scriptable]
+        public string GetLogicSource()
+        {
+            return level.LogicSource;
+        }
+
+        [Scriptable]
+        public string GetForegroundSource()
+        {
+            return level.ForegroundSource;
+        }
+
+        [Scriptable]
+        public string GetBackgroundSource()
+        {
+            return level.BackgroundSource;
+        }
+
+        [Scriptable]
+        public bool EvalForeground(string xaml)
+        {
+            level.ForegroundSource = xaml;
+            RestartLevel();
+            return true;
+        }
+
+        [Scriptable]
+        public bool EvalBackground(string xaml)
+        {
+            level.BackgroundSource = xaml;
+            RestartLevel();
+            return true;
+        }
+
+        #endregion
     }
 }

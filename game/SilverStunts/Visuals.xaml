@@ -1,6 +1,6 @@
-﻿<BinderDefinitions>
+﻿<VisualDefinitions>
 
-  <Binder Type="Wheel">
+  <Visual Type="Wheel">
     <Canvas.RenderTransform>
       <TransformGroup>
         <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
@@ -17,9 +17,9 @@
         <ImageBrush ImageSource="Graphics/Wheel.png" />
       </Ellipse.Fill>
     </Ellipse>
-  </Binder>
+  </Visual>
 
-  <Binder Type="CircleParticle">
+  <Visual Type="CircleParticle">
     <Canvas.RenderTransform>
       <TransformGroup>
         <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
@@ -27,9 +27,9 @@
       </TransformGroup>
     </Canvas.RenderTransform>
     <Ellipse Width="{Diameter}" Height="{Diameter}" Fill="Blue" RenderTransformOrigin="0.5, 0.5"/>
-  </Binder>
+  </Visual>
 
-  <Binder Type="RectangleParticle">
+  <Visual Type="RectangleParticle">
     <Canvas.RenderTransform>
       <TransformGroup>
         <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
@@ -37,9 +37,9 @@
       </TransformGroup>
     </Canvas.RenderTransform>
     <Rectangle Width="{Width}" Height="{Height}" Fill="#80FF0000" Stroke="#80000000" StrokeThickness="0.01"/>
-  </Binder>
+  </Visual>
 
-  <Binder Type="LineSurface">
+  <Visual Type="LineSurface">
     <Canvas.RenderTransform>
       <TransformGroup>
         <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
@@ -59,9 +59,9 @@
         <TranslateTransform X="{CenterOffsetInv.X}" Y="{CenterOffsetInv.Y}"/>
       </TextBlock.RenderTransform>
     </TextBlock>
-  </Binder>
+  </Visual>
 
-  <Binder Type="RectangleSurface">
+  <Visual Type="RectangleSurface">
     <Canvas.RenderTransform>
       <TransformGroup>
         <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
@@ -70,9 +70,9 @@
     </Canvas.RenderTransform>
     <Rectangle Width="{Width}" Height="{Height}" Fill="#80FF0000" Stroke="#80000000" StrokeThickness="0.01"/>
     <TextBlock Text="Rectangle" FontFamily="Verdana" FontSize="10"/>
-  </Binder>
+  </Visual>
 
-  <Binder Type="CircleSurface">
+  <Visual Type="CircleSurface">
     <Canvas.RenderTransform>
       <TransformGroup>
         <TranslateTransform X="{CenterOffset.X}" Y="{CenterOffset.Y}"/>
@@ -81,17 +81,17 @@
     </Canvas.RenderTransform>
     <Ellipse Width="{Diameter}" Height="{Diameter}" Fill="#8888FF" RenderTransformOrigin="0.5, 0.5"/>
     <TextBlock Text="Circle" FontFamily="Verdana" FontSize="10"/>
-  </Binder>
+  </Visual>
 
-  <Binder Type="AngularConstraint">
-  </Binder>
+  <Visual Type="AngularConstraint">
+  </Visual>
 
-  <Binder Type="SpringConstraint">
-    <!--<Line X1="{P1.Curr.X}" Y1="{P1.Curr.Y}" X2="{P2.Curr.X}" Y2="{P2.Curr.Y}" Stroke="Orange"/>-->
-  </Binder>
+  <Visual Type="SpringConstraint">
+    <!-- <Line X1="{P1.Curr.X}" Y1="{P1.Curr.Y}" X2="{P2.Curr.X}" Y2="{P2.Curr.Y}" Stroke="Orange"/> -->
+  </Visual>
 
-  <Binder Type="CollisionState">
+  <Visual Type="CollisionState">
     <Line X1="{P1.X}" Y1="{P1.Y}" X2="{P2.X}" Y2="{P2.Y}" Stroke="Green" StrokeThickness="4"/>
-  </Binder>
+  </Visual>
 
-</BinderDefinitions>
+</VisualDefinitions>

@@ -39,7 +39,7 @@ namespace SilverStunts.Entities
         public Line(double x1, double y1, double x2, double y2)
         {
             LineSurface line = new LineSurface(x1, y1, x2, y2);
-            _binder = new Binder(line, Binder.Family.Line, null);
+            _binder = new Visual(line, Visual.Family.Line, null);
         
             Born();
         }

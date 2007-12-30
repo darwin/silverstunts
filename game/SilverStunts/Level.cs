@@ -21,9 +21,9 @@ namespace SilverStunts
     public class EntityCreatedArgs : EventArgs
     {
         public Entity entity;
-        public Binder binder;
+        public Visual binder;
 
-        public EntityCreatedArgs(Entity entity, Binder binder)
+        public EntityCreatedArgs(Entity entity, Visual binder)
         {
             this.binder = binder;
             this.entity = entity;
@@ -46,8 +46,8 @@ namespace SilverStunts
         public string LogicSource;
 
         ScriptShell shell;
-        public List<Binder> binders = new List<Binder>(); // game entities
-        List<KeyValuePair<Binder, Entity>> toBeResolved = new List<KeyValuePair<Binder, Entity>>(); // entities toBeResolved for name resolution
+        public List<Visual> binders = new List<Visual>(); // game entities
+        List<KeyValuePair<Visual, Entity>> toBeResolved = new List<KeyValuePair<Visual, Entity>>(); // entities toBeResolved for name resolution
 
         public event EventHandler<EntityCreatedArgs> OnEntityCreated;
 
@@ -126,9 +126,9 @@ namespace SilverStunts
             }
         }
 
-        public void EntityCreated(Entity entity, Binder binder)
+        public void EntityCreated(Entity entity, Visual binder)
         {
-            toBeResolved.Add(new KeyValuePair<Binder, Entity>(binder, entity)); // cannot resolve name now, because binder is yet not living in scripting engine
+            toBeResolved.Add(new KeyValuePair<Visual, Entity>(binder, entity)); // cannot resolve name now, because binder is yet not living in scripting engine
 
             // put binder into physics
             physics.Add(binder.source);
@@ -141,7 +141,7 @@ namespace SilverStunts
             if (OnEntityCreated != null) OnEntityCreated(this, new EntityCreatedArgs(entity, binder));
         }
 
-        public void EntityDestroyed(Binder binder)
+        public void EntityDestroyed(Visual binder)
         {
             binders.Remove(binder);
 
@@ -155,9 +155,9 @@ namespace SilverStunts
         public void UpdateBinders()
         {
             // lookup binder names
-            ResolveWaintingEntities();
+            ResolveWaitingEntities();
 
-            foreach (Binder binder in binders)
+            foreach (Visual binder in binders)
             {
                 if (binder.source.IsDirty())
                 {
@@ -167,10 +167,10 @@ namespace SilverStunts
             }
         }
 
-        private void ResolveWaintingEntities()
+        private void ResolveWaitingEntities()
         {
             if (toBeResolved.Count == 0) return;
-            foreach (KeyValuePair<Binder, Entity> pair in toBeResolved)
+            foreach (KeyValuePair<Visual, Entity> pair in toBeResolved)
             {
                 pair.Key.source.name = LookupEntityName(pair.Value);
                 UpdateEntityName(pair.Value);
@@ -275,7 +275,7 @@ namespace SilverStunts
 
         public void Clear()
         {
-            foreach (Binder binder in binders)
+            foreach (Visual binder in binders)
             {
                 // remove binder from world            
                 world.Children.Remove(binder);
@@ -295,11 +295,11 @@ namespace SilverStunts
             int rectanglesCount = 0;
             int circlesCount = 0;
 
-            foreach (Binder binder in binders)
+            foreach (Visual binder in binders)
             {
-                if (binder.family == Binder.Family.Line) linesCount++;
-                if (binder.family == Binder.Family.Rectangle) rectanglesCount++;
-                if (binder.family == Binder.Family.Circle) circlesCount++;
+                if (binder.family == Visual.Family.Line) linesCount++;
+                if (binder.family == Visual.Family.Rectangle) rectanglesCount++;
+                if (binder.family == Visual.Family.Circle) circlesCount++;
             }
 
             return String.Format("Level: {0,-20} Entities={1:000} [L{2:000} R{3:000} C{4:000}]",
@@ -308,10 +308,10 @@ namespace SilverStunts
                 linesCount, rectanglesCount, circlesCount);
         }
 
-        public Binder PickSurface(double x, double y)
+        public Visual PickSurface(double x, double y)
         {
             Physics.Primitives.RectangleParticle particle = new Physics.Primitives.RectangleParticle(x, y, 2, 2);
-            foreach (Binder binder in binders)
+            foreach (Visual binder in binders)
             {
                 if (binder.source is Physics.Surfaces.ISurface)
                 {
@@ -322,11 +322,11 @@ namespace SilverStunts
             return null;
         }
 
-        public List<Binder> PickSurfaces(double x, double y, double w, double h)
+        public List<Visual> PickSurfaces(double x, double y, double w, double h)
         {
-            List<Binder> picks = new List<Binder>();
+            List<Visual> picks = new List<Visual>();
             Physics.Primitives.RectangleParticle particle = new Physics.Primitives.RectangleParticle(x, y, w, h);
-            foreach (Binder binder in binders)
+            foreach (Visual binder in binders)
             {
                 if (binder.source is Physics.Surfaces.ISurface)
                 {
@@ -348,7 +348,7 @@ namespace SilverStunts
 
             sb.AppendLine("<Canvas x:Name=\"world\" Width=\"0\" Height=\"0\">");
 
-            foreach (Binder binder in binders)
+            foreach (Visual binder in binders)
             {
                 if (binder.source is Physics.Surfaces.ISurface)
                 {

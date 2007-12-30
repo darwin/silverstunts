@@ -22,7 +22,7 @@ namespace SilverStunts
     {
         protected Editor editor;
         public PhysicsObject editable;
-        public Binder binder;
+        public Visual binder;
         protected Canvas content;
 
         bool dragging = false;
@@ -34,7 +34,7 @@ namespace SilverStunts
         System.Windows.Shapes.Line gridLine;
         Point gridShift;
 
-        public EditGizmo(Editor editor, Binder binder)
+        public EditGizmo(Editor editor, Visual binder)
         {
             this.editor = editor;
             this.editable = binder.source;
@@ -297,7 +297,7 @@ namespace SilverStunts
 
     public class MoveGizmo : EditGizmo
     {
-        public MoveGizmo(Editor parent, Binder binder)
+        public MoveGizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
         }
@@ -309,7 +309,7 @@ namespace SilverStunts
         double tcx;
         double tcy;
 
-        public RectangleMoveGizmo(Editor parent, Binder binder)
+        public RectangleMoveGizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
             target = (RectangleSurface)editable;
@@ -366,7 +366,7 @@ namespace SilverStunts
         double rx;
         double by;
 
-        public RectangleResizeTLGizmo(Editor parent, Binder binder)
+        public RectangleResizeTLGizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
             target = (RectangleSurface)editable;
@@ -428,7 +428,7 @@ namespace SilverStunts
         double rx;
         double by;
 
-        public RectangleResizeTRGizmo(Editor parent, Binder binder)
+        public RectangleResizeTRGizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
             target = (RectangleSurface)editable;
@@ -494,7 +494,7 @@ namespace SilverStunts
         double rx;
         double by;
 
-        public RectangleResizeBRGizmo(Editor parent, Binder binder)
+        public RectangleResizeBRGizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
             target = (RectangleSurface)editable;
@@ -560,7 +560,7 @@ namespace SilverStunts
         double rx;
         double by;
 
-        public RectangleResizeBLGizmo(Editor parent, Binder binder)
+        public RectangleResizeBLGizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
             target = (RectangleSurface)editable;
@@ -624,7 +624,7 @@ namespace SilverStunts
         double tcx;
         double tcy;
 
-        public CircleMoveGizmo(Editor parent, Binder binder)
+        public CircleMoveGizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
             target = (CircleSurface)editable;
@@ -676,7 +676,7 @@ namespace SilverStunts
         CircleSurface target;
         double tr;
 
-        public CircleRadiusGizmo(Editor parent, Binder binder)
+        public CircleRadiusGizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
             target = (CircleSurface)editable;
@@ -714,7 +714,7 @@ namespace SilverStunts
         Vector tp1;
         Vector tp2;
 
-        public LineSurfaceMoveGizmo(Editor parent, Binder binder)
+        public LineSurfaceMoveGizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
             target = (LineSurface)editable;
@@ -771,7 +771,7 @@ namespace SilverStunts
         LineSurface target;
         Vector tp1;
 
-        public LineSurfaceH1Gizmo(Editor parent, Binder binder)
+        public LineSurfaceH1Gizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
             target = (LineSurface)editable;
@@ -822,7 +822,7 @@ namespace SilverStunts
         LineSurface target;
         Vector tp2;
 
-        public LineSurfaceH2Gizmo(Editor parent, Binder binder)
+        public LineSurfaceH2Gizmo(Editor parent, Visual binder)
             : base(parent, binder)
         {
             target = (LineSurface)editable;

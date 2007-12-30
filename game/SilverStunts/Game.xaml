@@ -12,12 +12,6 @@
   
   <!-- Scrolling canvas for game and editor -->
   <Canvas x:Name="scroller">
-    
-    <Canvas.RenderTransform>
-      <TransformGroup>
-        <TranslateTransform X="0" Y="0"/>
-      </TransformGroup>
-    </Canvas.RenderTransform>
 
     <Canvas x:Name="background">
       <!-- Here will be inserted background xaml -->

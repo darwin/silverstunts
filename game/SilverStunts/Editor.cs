@@ -43,7 +43,7 @@ namespace SilverStunts
         List<IGizmo> dragGizmos = new List<IGizmo>();
         List<IGizmo> clipboard = new List<IGizmo>();
 
-        Binder lastPick;
+        Visual lastPick;
         bool wantAdditionalGizmos = false;
         bool inDragMode = false;
 
@@ -52,7 +52,7 @@ namespace SilverStunts
 
         public bool Active { get; set; }
 
-        Binder binderToBeSelected;
+        Visual binderToBeSelected;
 
         public Editor(Game game)
         {
@@ -240,7 +240,7 @@ namespace SilverStunts
             }
 
             Point pos = GetWorldPos(e);
-            Binder pick = game.PickSurface(pos.X, pos.Y);
+            Visual pick = game.PickSurface(pos.X, pos.Y);
             if (pick != null)
             {
                 // click-to-move behavior
@@ -307,10 +307,10 @@ namespace SilverStunts
                 {
                     // rectangular selection mode
                     SelectionGizmo gizmo = dragGizmos[0] as SelectionGizmo;
-                    List<Binder> picks = game.PickSurfaces(gizmo.x, gizmo.y, gizmo.w, gizmo.h);
+                    List<Visual> picks = game.PickSurfaces(gizmo.x, gizmo.y, gizmo.w, gizmo.h);
 
                     // select picks
-                    foreach (Binder pick in picks)
+                    foreach (Visual pick in picks)
                     {
                         InitMainGizmo(pick);
                         InitAdditionalGizmos(pick);
@@ -357,7 +357,7 @@ namespace SilverStunts
             }
         }
 
-        public void InitAdditionalGizmos(Binder binder)
+        public void InitAdditionalGizmos(Visual binder)
         {
             if (binder == null) return;
 
@@ -379,7 +379,7 @@ namespace SilverStunts
             }
         }
 
-        public IGizmo InitMainGizmo(Binder binder)
+        public IGizmo InitMainGizmo(Visual binder)
         {
             if (binder == null) return null;
 

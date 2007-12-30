@@ -18,7 +18,7 @@ class Redirect:
 
 ####################################################################
 
-def onLoaded(sender, args) :
+def onLoaded(sender, args):
     # bootstrap page
     global page
     page = SilverStunts.CreateInstance("SilverStunts.Page")
@@ -26,12 +26,3 @@ def onLoaded(sender, args) :
     # redirect standard outputs
     sys.stdout = Redirect(SilverStunts.SilverStunts.Page.ConsoleOutputKind.Output)
     sys.stderr = Redirect(SilverStunts.SilverStunts.Page.ConsoleOutputKind.Error)
-    
-def onTick(sender, args) :
-    # route tick to managed code
-    return page.Tick(sender, args)
-    
-def onStatsTick(sender, args) :
-    # route tick to managed code
-    global page
-    return page.stats.Tick(sender, args)    

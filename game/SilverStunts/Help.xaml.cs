@@ -18,7 +18,7 @@ namespace SilverStunts
 
         TextBlock pageHelp;
 
-        public Help()
+        public Help(Canvas parent)
         {
             Stream s = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.Help.xaml");
             content = (ClipCanvas)this.InitializeFromXaml(new StreamReader(s).ReadToEnd());
