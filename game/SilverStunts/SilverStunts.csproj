@@ -47,10 +47,7 @@
   <ItemGroup>
     <Compile Include="DummyActor.cs" />
     <Compile Include="Entities\Surface.cs" />
-    <Compile Include="EntityNamer.cs" />
     <Compile Include="Bike.cs" />
-    <Compile Include="Brushes.cs" />
-    <Compile Include="ClipCanvas.cs" />
     <Compile Include="Editor.cs" />
     <Compile Include="Entities\Circle.cs" />
     <Compile Include="Entities\Entity.cs" />
@@ -70,12 +67,10 @@
     <Compile Include="Layer.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelDescriptor.cs" />
-    <Compile Include="Timer.cs" />
     <Compile Include="Page.xaml.cs">
       <DependentUpon>Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResourceDownloader.cs" />
     <Compile Include="ScriptShell.cs" />
     <Compile Include="Stats.xaml.cs">
       <DependentUpon>Stats.xaml</DependentUpon>
@@ -83,6 +78,11 @@
     <Compile Include="Help.xaml.cs">
       <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Brushes.cs" />
+    <Compile Include="Utils\ClipCanvas.cs" />
+    <Compile Include="Utils\EntityNamer.cs" />
+    <Compile Include="Utils\ResourceDownloader.cs" />
+    <Compile Include="Utils\Timer.cs" />
     <Compile Include="Visual.cs" />
   </ItemGroup>
   <ItemGroup>
