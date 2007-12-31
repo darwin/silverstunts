@@ -30,12 +30,12 @@ namespace SilverStunts
 
 			reprDelegate = engine.EvaluateAs<ReprDelegate>("repr");
 
-			// bring WPF symbols into scripting namespace
-			ScriptModule wpf = ScriptDomainManager.CurrentManager.CreateModule("wpf");
-			Stream s = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.WPF.py");
-			string code = new StreamReader(s).ReadToEnd();
-			engine.Execute(code, wpf);
-			module.SetVariable("wpf", wpf);
+			// TODO: bring WPF symbols into scripting namespace
+			//ScriptModule wpf = ScriptDomainManager.CurrentManager.CreateModule("wpf");
+			//Stream s = this.GetType().Assembly.GetManifestResourceStream("SilverStunts.WPF.py");
+			//string code = new StreamReader(s).ReadToEnd();
+			//engine.Execute(code, wpf);
+			//module.SetVariable("wpf", wpf);
 		}
 
 		public bool IsComplete(string text, bool allowIncomplete)

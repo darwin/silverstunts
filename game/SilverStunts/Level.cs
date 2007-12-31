@@ -271,6 +271,7 @@ namespace SilverStunts
 				// TODO: test result
 				initDelegate();
 			}
+
 		}
 
 		public void ProcessInputs(bool[] keys)

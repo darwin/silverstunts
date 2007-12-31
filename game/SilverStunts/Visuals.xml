@@ -54,7 +54,7 @@
 				</TransformGroup>
 			</Line.RenderTransform>
 		</Line>
-		<TextBlock Text="Line" FontFamily="Verdana" FontSize="10" Visibility="Collapsed">
+		<TextBlock Text="Line" FontFamily="Verdana" FontSize="10">
 			<TextBlock.RenderTransform>
 				<TranslateTransform X="{CenterOffsetInv.X}" Y="{CenterOffsetInv.Y}"/>
 			</TextBlock.RenderTransform>
@@ -69,7 +69,7 @@
 			</TransformGroup>
 		</Canvas.RenderTransform>
 		<Rectangle Width="{Width}" Height="{Height}" Fill="#888888" Stroke="#80000000" StrokeThickness="0.01"/>
-		<TextBlock Text="Rectangle" FontFamily="Verdana" FontSize="10" Visibility="Collapsed"/>
+		<TextBlock Text="Rectangle" FontFamily="Verdana" FontSize="10"/>
 	</Visual>
 
 	<Visual Type="CircleSurface">
@@ -80,7 +80,7 @@
 			</TransformGroup>
 		</Canvas.RenderTransform>
 		<Ellipse Width="{Diameter}" Height="{Diameter}" Fill="#888888" RenderTransformOrigin="0.5, 0.5"/>
-		<TextBlock Text="Circle" FontFamily="Verdana" FontSize="10" Visibility="Collapsed"/>
+		<TextBlock Text="Circle" FontFamily="Verdana" FontSize="10"/>
 	</Visual>
 
 	<Visual Type="AngularConstraint">

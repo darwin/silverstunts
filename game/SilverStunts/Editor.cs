@@ -83,17 +83,13 @@ namespace SilverStunts
 			Deselect();
 			dragGizmos.Clear();
 			clipboard.Clear();
+			if (!Active) HideNames();
 		}
 
 		public void EnableOnionEffect()
 		{
 			foreach (Visual visual in game.level.visuals)
 			{
-				// apply to surfaces only
-				if (visual.family!=Visual.Family.Line && 
-					visual.family!=Visual.Family.Circle &&
-					visual.family!=Visual.Family.Rectangle) continue;
-
 				EnableOnionEffect(visual);
 			}
 			game.level.OnEntityCreated += new EventHandler<EntityCreatedArgs>(level_OnionHandler);
@@ -101,6 +97,11 @@ namespace SilverStunts
 
 		public static void EnableOnionEffect(Visual visual)
 		{
+			// apply to surfaces only
+			if (visual.family != Visual.Family.Line &&
+				visual.family != Visual.Family.Circle &&
+				visual.family != Visual.Family.Rectangle) return;
+
 			visual.content.Opacity = 0.8;
 			int count = visual.content.Children.Count;
 			bool firstLine = true;
@@ -134,11 +135,6 @@ namespace SilverStunts
 		{
 			foreach (Visual visual in game.level.visuals)
 			{
-				// apply to surfaces only
-				if (visual.family != Visual.Family.Line &&
-					visual.family != Visual.Family.Circle &&
-					visual.family != Visual.Family.Rectangle) continue;
-
 				DisableOnionEffect(visual);
 			}
 			game.level.OnEntityCreated -= new EventHandler<EntityCreatedArgs>(level_OnionHandler);
@@ -146,6 +142,11 @@ namespace SilverStunts
 
 		public static void DisableOnionEffect(Visual visual)
 		{
+			// apply to surfaces only
+			if (visual.family != Visual.Family.Line &&
+				visual.family != Visual.Family.Circle &&
+				visual.family != Visual.Family.Rectangle) return;
+
 			visual.content.Opacity = 1.0;
 			int count = visual.content.Children.Count;
 			bool firstLine = true;
@@ -178,6 +179,7 @@ namespace SilverStunts
 		void level_OnionHandler(object sender, EntityCreatedArgs e)
 		{
 			EnableOnionEffect(e.visual);
+			if (!names) HideName(e.visual);
 		}
 
 		public void ShowNames()
@@ -200,14 +202,19 @@ namespace SilverStunts
 		{
 			foreach (Visual visual in game.level.visuals)
 			{
-				int i = visual.content.Children.Count;
-				while (--i>0) 
+				HideName(visual);
+			}
+		}
+
+		private static void HideName(Visual visual)
+		{
+			int i = visual.content.Children.Count;
+			while (--i > 0)
+			{
+				if (visual.content.Children[i] is TextBlock)
 				{
-					if (visual.content.Children[i] is TextBlock)
-					{
-						TextBlock text = visual.content.Children[i] as TextBlock;
-						text.Visibility = Visibility.Collapsed;
-					}
+					TextBlock text = visual.content.Children[i] as TextBlock;
+					text.Visibility = Visibility.Collapsed;
 				}
 			}
 		}
