@@ -177,7 +177,8 @@ namespace SilverStunts
 								if (val is Double)
 								{
 									double num = (double)val;
-									value = String.Format("{0:0.00}", num);
+									// don't mess the value with locale settings
+									value = num.ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
 								}
 								else
 								{
