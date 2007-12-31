@@ -1,62 +1,43 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
 <head>
-    <title>Script Console</title>
-    <style type="text/css">
-        html, body
-        {
-            padding: 0px;
-            margin: 0px;
-            height: 100%;
-            width: 100%;
-            background-color: Black;
-        }
-        
-        #console 
-        {
-            padding: 0px;
-            margin: 0px;
-            width: 100%;
-            font-family: monospace;
-            font-size: medium;
-            color: White;
-            vertical-align: bottom;
-        }
-     </style>
-     
+	<title>Script Console</title>
+	<style type="text/css">
+		html, body { padding: 0px; margin: 0px; height: 100%; width: 100%; background-color: Black; }
+		#console { padding: 0px; margin: 0px; width: 100%; font-family: monospace; font-size: medium; color: White; vertical-align: bottom; }
+	</style>
+
 <script type="text/javascript">
 
-function ScrollBottom()
-{
-    // scroll down
-    window.scrollTo(0, 10000000);
-}
+	function ScrollBottom()
+	{
+		// scroll down
+		window.scrollTo(0, 10000000);
+	}
 
-function UpdateConsole(s)
-{
-    var e = document.getElementById("console");
-    if (!e) return false;
-    
-    // update text
-    e.innerHTML = s;
-    
-    ScrollBottom();
-            
-    return true;
-}
+	function UpdateConsole(s)
+	{
+		var e = document.getElementById("console");
+		if (!e) return false;
+		
+		// update text
+		e.innerHTML = s;
+		
+		return ScrollBottom();
+	}
 
-function ConsoleReady()
-{
-    var ideWindow = window.parent; // StuntsIDE.html
-    var mainWindow = ideWindow.opener; // SilverStunts.html
-    if (mainWindow && !mainWindow.closed)
-        mainWindow.OnConsoleReady();
-}
+	function ConsoleReady()
+	{
+		var ideWindow = window.parent; // ide.html
+		var mainWindow = ideWindow.opener; // index.html
+		if (mainWindow && !mainWindow.closed) mainWindow.OnConsoleReady();
+	}
 
-window.onresize = ScrollBottom
-window.onload = ConsoleReady
+	window.onresize = ScrollBottom;
+	window.onload = ConsoleReady;
+
 </script>
-   
+
 </head>
 
 <body>

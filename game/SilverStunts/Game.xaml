@@ -1,41 +1,41 @@
 ﻿<ss:ClipCanvas x:Name="viewport"
-        xmlns="http://schemas.microsoft.com/client/2007"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:ss="clr-namespace:SilverStunts;assembly=SilverStunts.dll"
-        Width="1000" Height="600"
-        Background="#EEEEEE"
-        >
+	xmlns="http://schemas.microsoft.com/client/2007"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:ss="clr-namespace:SilverStunts;assembly=SilverStunts.dll"
+	Width="1000" Height="600"
+	Background="#EEEEEE"
+>
 
-  <Canvas x:Name="gui" >
-    <!-- Here will be inserted game UI elements -->
-  </Canvas>
-  
-  <!-- Scrolling canvas for game and editor -->
-  <Canvas x:Name="scroller">
+	<Canvas x:Name="gui" >
+		<!-- here will be inserted game UI elements -->
+	</Canvas>
+	
+	<!-- scrolling canvas for game and editor -->
+	<Canvas x:Name="scroller">
 
-    <Canvas x:Name="background">
-      <!-- Here will be inserted background xaml -->
-    </Canvas>
+		<Canvas x:Name="background">
+			<!-- here will be inserted background xaml -->
+		</Canvas>
 
-    <Canvas x:Name="world">
-      <!-- Here will be inserted game entities -->
-    </Canvas>
+		<Canvas x:Name="world">
+			<!-- here will be inserted game entities -->
+		</Canvas>
 
-    <Canvas x:Name="foreground">
-      <!-- Here will be inserted foreground xaml -->
-    </Canvas>
+		<Canvas x:Name="foreground">
+			<!-- here will be inserted foreground xaml -->
+		</Canvas>
 
-    <Canvas x:Name="workspace">
-      <!-- Here will be inserted editor UI elements (gizmos, etc) -->
-    </Canvas>
+		<Canvas x:Name="workspace">
+			<!-- here will be inserted editor UI elements (gizmos, etc) -->
+		</Canvas>
 
-  </Canvas>
+	</Canvas>
 
-  <Canvas Visibility="Collapsed" x:Name="grid" Opacity="0.1" Width="1000" Height="600">
-    <Canvas.Background>
-      <!-- SilverLight 1.1ALPHA does not support TileMode property on ImageBrush => need to improvise using image -->
-      <ImageBrush ImageSource="images/grid.png" />
-    </Canvas.Background>
-  </Canvas>
+	<Canvas Visibility="Collapsed" x:Name="grid" Opacity="0.1" Width="1000" Height="600">
+		<Canvas.Background>
+			<!-- SilverLight 1.1ALPHA does not support TileMode property on ImageBrush => need to improvise using image -->
+			<ImageBrush ImageSource="images/grid.png" />
+		</Canvas.Background>
+	</Canvas>
 
 </ss:ClipCanvas>

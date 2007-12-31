@@ -23,25 +23,25 @@ from System.Windows.Interop import *
 #work-around for generic method perf bug
 SetIntValue = DependencyObject.SetValue.Template[int]
 def SetPosition(o, x, y):
-    SetIntValue(o, Canvas.TopProperty, y)
-    SetIntValue(o, Canvas.LeftProperty, x)
-    
+	SetIntValue(o, Canvas.TopProperty, y)
+	SetIntValue(o, Canvas.LeftProperty, x)
+	
 def GetPosition(o):
-    return o.GetValue(Canvas.LeftProperty), o.GetValue(Canvas.TopProperty)
+	return o.GetValue(Canvas.LeftProperty), o.GetValue(Canvas.TopProperty)
 
 
 def LoadXaml(url):
-    uri = MakeUri(url)
-    request = System.Windows.Browser.Net.BrowserHttpWebRequest(uri)
-    response = request.GetResponse()
-    reader = System.IO.StreamReader(response.GetResponseStream())
-    xaml = reader.ReadToEnd ()
-    reader.Close()
-    return XamlReader.Load(xaml)
+	uri = MakeUri(url)
+	request = System.Windows.Browser.Net.BrowserHttpWebRequest(uri)
+	response = request.GetResponse()
+	reader = System.IO.StreamReader(response.GetResponseStream())
+	xaml = reader.ReadToEnd ()
+	reader.Close()
+	return XamlReader.Load(xaml)
 
 def MakeUri(url):
-    return System.Uri(System.Windows.Browser.HtmlPage.DocumentUri, url)
-    
+	return System.Uri(System.Windows.Browser.HtmlPage.DocumentUri, url)
+	
 def __Setup():
 	for name in dir(Colors):
 		c = getattr(Colors, name)

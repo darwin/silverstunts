@@ -5,19 +5,18 @@ using System.Windows;
 namespace SilverStunts 
 {
 	public class ClipCanvas : Canvas 
-    {
-		private RectangleGeometry clipGeometry;
+	{
+		private RectangleGeometry clipper;
 
 		public ClipCanvas() 
-        {
-			this.clipGeometry = new RectangleGeometry();
-			this.Clip = this.clipGeometry;
+		{
+			this.clipper = new RectangleGeometry();
+			this.Clip = this.clipper;
 		}
 
 		public void UpdateLayout() 
-        {
-			Rect newClip = new Rect(0, 0, this.Width, this.Height);
-			this.clipGeometry.Rect = newClip;
+		{
+			this.clipper.Rect = new Rect(0, 0, this.Width, this.Height);
 		}
 	}
 }

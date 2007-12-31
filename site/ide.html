@@ -5,64 +5,64 @@
 <script type="text/javascript">
 function UpdateConsole(s)
 {
-    var stuntsConsole = window.frames['StuntsConsole'];
-    if (!stuntsConsole) return;
-    return stuntsConsole.UpdateConsole(s);
+	var stuntsConsole = window.frames['StuntsConsole'];
+	if (!stuntsConsole) return;
+	return stuntsConsole.UpdateConsole(s);
 }
 
 function UpdateEntities(s)
 {
-    var stuntsEditor = window.frames['StuntsEditor'];
-    if (!stuntsEditor) return;
-    return stuntsEditor.UpdateEntities(s);
+	var stuntsEditor = window.frames['StuntsEditor'];
+	if (!stuntsEditor) return;
+	return stuntsEditor.UpdateEntities(s);
 }
 
 function UpdateLogic(s)
 {
-    var stuntsEditor = window.frames['StuntsEditor'];
-    if (!stuntsEditor) return;
-    return stuntsEditor.UpdateLogic(s);
+	var stuntsEditor = window.frames['StuntsEditor'];
+	if (!stuntsEditor) return;
+	return stuntsEditor.UpdateLogic(s);
 }
 
 function UpdateForeground(s)
 {
-    var stuntsEditor = window.frames['StuntsEditor'];
-    if (!stuntsEditor) return;
-    return stuntsEditor.UpdateForeground(s);
+	var stuntsEditor = window.frames['StuntsEditor'];
+	if (!stuntsEditor) return;
+	return stuntsEditor.UpdateForeground(s);
 }
 
 function UpdateBackground(s)
 {
-    var stuntsEditor = window.frames['StuntsEditor'];
-    if (!stuntsEditor) return;
-    return stuntsEditor.UpdateBackground(s);
+	var stuntsEditor = window.frames['StuntsEditor'];
+	if (!stuntsEditor) return;
+	return stuntsEditor.UpdateBackground(s);
 }
 
 function UpdateClipboard(s)
 {
-    var stuntsEditor = window.frames['StuntsEditor'];
-    if (!stuntsEditor) return;
-    return stuntsEditor.UpdateClipboard(s);
+	var stuntsEditor = window.frames['StuntsEditor'];
+	if (!stuntsEditor) return;
+	return stuntsEditor.UpdateClipboard(s);
 }
 
 function RequestEntitiesSource()
 {
-    var stuntsEditor = window.frames['StuntsEditor'];
-    if (!stuntsEditor) return;
-    return stuntsEditor.RequestEntitiesSource();
+	var stuntsEditor = window.frames['StuntsEditor'];
+	if (!stuntsEditor) return;
+	return stuntsEditor.RequestEntitiesSource();
 }
 
 function PublishEntitiesSource(s)
 {
-    var stuntsEditor = window.frames['StuntsEditor'];
-    if (!stuntsEditor) return;
-    return stuntsEditor.UpdateEntities(s);
+	var stuntsEditor = window.frames['StuntsEditor'];
+	if (!stuntsEditor) return;
+	return stuntsEditor.UpdateEntities(s);
 }
 </script>
 
 </head>
 <frameset rows="75%, *">
-     <frame name="StuntsEditor" src="editor.html"/>
-     <frame name="StuntsConsole" src="console.html"/>
+	 <frame name="StuntsEditor" src="editor.html"/>
+	 <frame name="StuntsConsole" src="console.html"/>
 </frameset>
 </html>

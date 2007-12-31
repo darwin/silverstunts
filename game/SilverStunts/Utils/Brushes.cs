@@ -4,19 +4,19 @@ using System.Windows.Media;
 namespace SilverStunts 
 {
 	public class Brushes 
-    {
-        public static SolidColorBrush White
-        {
-            get
-            {
-                SolidColorBrush sb = new SolidColorBrush();
-                sb.Color = Colors.White;
-                return sb;
-            }
-        }
+	{
+		public static SolidColorBrush White
+		{
+			get
+			{
+				SolidColorBrush sb = new SolidColorBrush();
+				sb.Color = Colors.White;
+				return sb;
+			}
+		}
 
-        public static SolidColorBrush Black
-        {
+		public static SolidColorBrush Black
+		{
 			get {
 				SolidColorBrush sb = new SolidColorBrush();
 				sb.Color = Colors.Black;
@@ -32,28 +32,28 @@ namespace SilverStunts
 			}
 		}
 
-        public static SolidColorBrush Yellow
-        {
-            get
-            {
-                SolidColorBrush sb = new SolidColorBrush();
-                sb.Color = Colors.Yellow;
-                return sb;
-            }
-        }
+		public static SolidColorBrush Yellow
+		{
+			get
+			{
+				SolidColorBrush sb = new SolidColorBrush();
+				sb.Color = Colors.Yellow;
+				return sb;
+			}
+		}
 
-        public static SolidColorBrush Orange
-        {
-            get
-            {
-                SolidColorBrush sb = new SolidColorBrush();
-                sb.Color = Colors.Orange;
-                return sb;
-            }
-        }
+		public static SolidColorBrush Orange
+		{
+			get
+			{
+				SolidColorBrush sb = new SolidColorBrush();
+				sb.Color = Colors.Orange;
+				return sb;
+			}
+		}
 
-        public static SolidColorBrush DarkGray
-        {
+		public static SolidColorBrush DarkGray
+		{
 			get {
 				SolidColorBrush sb = new SolidColorBrush();
 				sb.Color = Colors.DarkGray;

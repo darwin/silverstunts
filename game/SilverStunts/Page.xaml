@@ -1,70 +1,70 @@
 ﻿<Canvas x:Name="root"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Width="1000"
-        Height="600"
-        Background="Black"
-        >
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				Width="1000"
+				Height="600"
+				Background="Black"
+				>
 
-  <x:Code Source="page.py" Type="text/ironpython" />
+	<x:Code Source="page.py" Type="text/ironpython" />
 
-  <Canvas x:Name="loader" Loaded="onLoaded" />
+	<Canvas x:Name="loader" Loaded="onLoaded" />
 
-  <Canvas x:Name="gamehost" Canvas.Left="0" Canvas.Top="0">
-    <!-- here will be inserted game component -->
-  </Canvas>
-  <Canvas x:Name="statshost" Canvas.Left="0" Canvas.Top="0">
-    <!-- here will be inserted statistics component -->
-  </Canvas>
+	<Canvas x:Name="gamehost" Canvas.Left="0" Canvas.Top="0">
+		<!-- here will be inserted game component -->
+	</Canvas>
+	<Canvas x:Name="statshost" Canvas.Left="0" Canvas.Top="0">
+		<!-- here will be inserted statistics component -->
+	</Canvas>
 
-  <!-- this is a continue message for player -->
-  <Canvas x:Name="continue" Canvas.Left="0" Canvas.Top="0" Visibility="Collapsed">
-    <TextBlock x:Name="presskey" Text="Press any key to start again" FontWeight="Bold" Foreground="Black" FontFamily="Verdana" FontSize="22">
-      <TextBlock.RenderTransform>
-        <TranslateTransform X="350" Y="300"/>
-      </TextBlock.RenderTransform>
-    </TextBlock>
-  </Canvas>
+	<!-- this is a continue message for player -->
+	<Canvas x:Name="continue" Canvas.Left="0" Canvas.Top="0" Visibility="Collapsed">
+		<TextBlock x:Name="presskey" Text="Press any key to start again" FontWeight="Bold" Foreground="Black" FontFamily="Verdana" FontSize="22">
+			<TextBlock.RenderTransform>
+				<TranslateTransform X="350" Y="300"/>
+			</TextBlock.RenderTransform>
+		</TextBlock>
+	</Canvas>
 
-  <Canvas x:Name="helphost" Canvas.Left="0" Canvas.Top="0">
-    <!-- here will be inserted help component -->
-  </Canvas>
+	<Canvas x:Name="helphost" Canvas.Left="0" Canvas.Top="0">
+		<!-- here will be inserted help component -->
+	</Canvas>
 
-  <!-- top info line -->
-  <Canvas x:Name="topline" Canvas.Left="0" Canvas.Top="0">
-    <TextBlock x:Name="helpad" Text="Press F1 for help" Foreground="Black" FontFamily="Monospace" FontSize="12">
-      <TextBlock.RenderTransform>
-        <TranslateTransform X="4" Y="0"/>
-      </TextBlock.RenderTransform>
-    </TextBlock>
+	<!-- top info line -->
+	<Canvas x:Name="topline" Canvas.Left="0" Canvas.Top="0">
+		<TextBlock x:Name="helpad" Text="Press F1 for help" Foreground="Black" FontFamily="Monospace" FontSize="12">
+			<TextBlock.RenderTransform>
+				<TranslateTransform X="4" Y="0"/>
+			</TextBlock.RenderTransform>
+		</TextBlock>
 
-    <TextBlock x:Name="techpreview" Text="SilverLight technology preview - game prototype" FontWeight="Bold" Foreground="Blue" FontFamily="Monospace" FontSize="12">
-      <TextBlock.RenderTransform>
-        <TranslateTransform X="350" Y="0"/>
-      </TextBlock.RenderTransform>
-    </TextBlock>
+		<TextBlock x:Name="techpreview" Text="SilverLight technology preview - game prototype" FontWeight="Bold" Foreground="Blue" FontFamily="Monospace" FontSize="12">
+			<TextBlock.RenderTransform>
+				<TranslateTransform X="350" Y="0"/>
+			</TextBlock.RenderTransform>
+		</TextBlock>
 
-    <TextBlock x:Name="version" Text="Version: 0.1" Foreground="Gray" FontFamily="Monospace" FontSize="12">
-      <TextBlock.RenderTransform>
-        <TranslateTransform X="920" Y="0"/>
-      </TextBlock.RenderTransform>
-    </TextBlock>
-  </Canvas>
+		<TextBlock x:Name="version" Text="Version: 0.1" Foreground="Gray" FontFamily="Monospace" FontSize="12">
+			<TextBlock.RenderTransform>
+				<TranslateTransform X="920" Y="0"/>
+			</TextBlock.RenderTransform>
+		</TextBlock>
+	</Canvas>
 
-  <!-- bottom info line -->
-  <Canvas x:Name="bottomline" Canvas.Left="0" Canvas.Top="0">
-    <TextBlock x:Name="pinfo" Text="Tested on Windows XP in Firefox 2.0, SilverLight Alpha 1.1" Foreground="Gray" FontFamily="Monospace" FontSize="12">
-      <TextBlock.RenderTransform>
-        <TranslateTransform X="4" Y="582"/>
-      </TextBlock.RenderTransform>
-    </TextBlock>
+	<!-- bottom info line -->
+	<Canvas x:Name="bottomline" Canvas.Left="0" Canvas.Top="0">
+		<TextBlock x:Name="pinfo" Text="Tested on Windows XP in Firefox 2.0, SilverLight Alpha 1.1" Foreground="Gray" FontFamily="Monospace" FontSize="12">
+			<TextBlock.RenderTransform>
+				<TranslateTransform X="4" Y="582"/>
+			</TextBlock.RenderTransform>
+		</TextBlock>
 
-    <TextBlock x:Name="copyright" Text="©2007 SilverStunts.com" Foreground="Gray" FontFamily="Monospace" FontSize="12">
-      <TextBlock.RenderTransform>
-        <TranslateTransform X="850" Y="582"/>
-      </TextBlock.RenderTransform>
-    </TextBlock>
+		<TextBlock x:Name="copyright" Text="©2007 SilverStunts.com" Foreground="Gray" FontFamily="Monospace" FontSize="12">
+			<TextBlock.RenderTransform>
+				<TranslateTransform X="850" Y="582"/>
+			</TextBlock.RenderTransform>
+		</TextBlock>
 
-  </Canvas>
+	</Canvas>
 
 </Canvas>

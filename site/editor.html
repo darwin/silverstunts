@@ -1,72 +1,72 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
 <head>
-    <title>SilverStunts Code Editor</title>
-    <link rel="stylesheet" href="tabber.css" type="text/css"/>
-    <script language="javascript" type="text/javascript" src="editarea/edit_area_loader.js"></script>
+	<title>SilverStunts Code Editor</title>
+	<link rel="stylesheet" href="tabber.css" type="text/css"/>
+	<script language="javascript" type="text/javascript" src="editarea/edit_area_loader.js"></script>
 
-    <script type="text/javascript">
+	<script type="text/javascript">
 // CSS Browser Selector   v0.2.5
 // Documentation:         http://rafael.adm.br/css_browser_selector
 // License:               http://creativecommons.org/licenses/by/2.5/
 // Author:                Rafael Lima (http://rafael.adm.br)
 // Contributors:          http://rafael.adm.br/css_browser_selector#contributors
 var css_browser_selector = function() {
-    var ua=navigator.userAgent.toLowerCase(),
-        is=function(t){ return ua.indexOf(t) != -1; },
-        h=document.getElementsByTagName('html')[0],
-        b=(!(/opera|webtv/i.test(ua))&&/msie (\d)/.test(ua))?('ie ie'+RegExp.$1):is('gecko/')? 'gecko':is('opera/9')?'opera opera9':/opera (\d)/.test(ua)?'opera opera'+RegExp.$1:is('konqueror')?'konqueror':is('applewebkit/')?'webkit safari':is('mozilla/')?'gecko':'',
-        os=(is('x11')||is('linux'))?' linux':is('mac')?' mac':is('win')?' win':'';
-    var c=b+os+' js';
-    h.className += h.className?' '+c:c;
+	var ua=navigator.userAgent.toLowerCase(),
+		is=function(t){ return ua.indexOf(t) != -1; },
+		h=document.getElementsByTagName('html')[0],
+		b=(!(/opera|webtv/i.test(ua))&&/msie (\d)/.test(ua))?('ie ie'+RegExp.$1):is('gecko/')? 'gecko':is('opera/9')?'opera opera9':/opera (\d)/.test(ua)?'opera opera'+RegExp.$1:is('konqueror')?'konqueror':is('applewebkit/')?'webkit safari':is('mozilla/')?'gecko':'',
+		os=(is('x11')||is('linux'))?' linux':is('mac')?' mac':is('win')?' win':'';
+	var c=b+os+' js';
+	h.className += h.className?' '+c:c;
 }();
-    </script>
+	</script>
 
-    <script type="text/javascript">
+	<script type="text/javascript">
 
 function consoleEvalLine(line, force)
 {
-    var ideWindow = window.parent; // StuntsIDE.html
-    var mainWindow = ideWindow.opener; // SilverStunts.html
-    if (mainWindow && !mainWindow.closed)
-        mainWindow.EvalExpression(line, force);
+	var ideWindow = window.parent; // ide.html
+	var mainWindow = ideWindow.opener; // index.html
+	if (mainWindow && !mainWindow.closed)
+		mainWindow.EvalExpression(line, force);
 }
 
 function evalEntities(code)
 {
-    var ideWindow = window.parent; // StuntsIDE.html
-    var mainWindow = ideWindow.opener; // SilverStunts.html
-    if (mainWindow && !mainWindow.closed)
-        mainWindow.EvalEntities(code);
+	var ideWindow = window.parent; // ide.html
+	var mainWindow = ideWindow.opener; // index.html
+	if (mainWindow && !mainWindow.closed)
+		mainWindow.EvalEntities(code);
 }
 
 function evalLogic(code)
 {
-    var ideWindow = window.parent; // StuntsIDE.html
-    var mainWindow = ideWindow.opener; // SilverStunts.html
-    if (mainWindow && !mainWindow.closed)
-        mainWindow.EvalLogic(code);
+	var ideWindow = window.parent; // ide.html
+	var mainWindow = ideWindow.opener; // index.html
+	if (mainWindow && !mainWindow.closed)
+		mainWindow.EvalLogic(code);
 }
 
 function evalForeground(code)
 {
-    var ideWindow = window.parent; // StuntsIDE.html
-    var mainWindow = ideWindow.opener; // SilverStunts.html
-    if (mainWindow && !mainWindow.closed)
-        mainWindow.EvalForeground(code);
+	var ideWindow = window.parent; // ide.html
+	var mainWindow = ideWindow.opener; // index.html
+	if (mainWindow && !mainWindow.closed)
+		mainWindow.EvalForeground(code);
 }
 
 function evalBackground(code)
 {
-    var ideWindow = window.parent; // StuntsIDE.html
-    var mainWindow = ideWindow.opener; // SilverStunts.html
-    if (mainWindow && !mainWindow.closed)
-        mainWindow.EvalBackground(code);
+	var ideWindow = window.parent; // ide.html
+	var mainWindow = ideWindow.opener; // index.html
+	if (mainWindow && !mainWindow.closed)
+		mainWindow.EvalBackground(code);
 }
 
-    </script>
+	</script>
 
-    <script type="text/javascript">
+	<script type="text/javascript">
 
 /* Optional: Temporarily hide the "tabber" class so it does not "flash"
    on the page as plain HTML. After tabber runs, the class is changed
@@ -79,36 +79,36 @@ var tabsInited = new Array();
 var tabberOptions = {
 
   /* Optional: instead of letting tabber run during the onload event,
-     we'll start it up manually. This can be useful because the onload
-     even runs after all the images have finished loading, and we can
-     run tabber at the bottom of our page to start it up faster. See the
-     bottom of this page for more info. Note: this variable must be set
-     BEFORE you include tabber.js.
+	 we'll start it up manually. This can be useful because the onload
+	 even runs after all the images have finished loading, and we can
+	 run tabber at the bottom of our page to start it up faster. See the
+	 bottom of this page for more info. Note: this variable must be set
+	 BEFORE you include tabber.js.
   */
   'manualStartup':true,
 
   /* Optional: code to run after each tabber object has initialized */
 
   'onLoad': function(argsObj) {
-    /* Display an alert only after tab2 */
-    if (argsObj.tabber.id == 'tabentities') {
-      alert('Finished loading eee!');
-    }
+	/* Display an alert only after tab2 */
+	if (argsObj.tabber.id == 'tabentities') {
+	  alert('Finished loading eee!');
+	}
   },
 
   /* Optional: code to run when the user clicks a tab. If this
-     function returns boolean false then the tab will not be changed
-     (the click is canceled). If you do not return a value or return
-     something that is not boolean false, */
+	 function returns boolean false then the tab will not be changed
+	 (the click is canceled). If you do not return a value or return
+	 something that is not boolean false, */
 
   'onClick': function(argsObj) {
 
-    var t = argsObj.tabber; /* Tabber object */
-    var id = t.id; /* ID of the main tabber DIV */
-    var i = argsObj.index; /* Which tab was clicked (0 is the first tab) */
-    var e = argsObj.event; /* Event object */
+	var t = argsObj.tabber; /* Tabber object */
+	var id = t.id; /* ID of the main tabber DIV */
+	var i = argsObj.index; /* Which tab was clicked (0 is the first tab) */
+	var e = argsObj.event; /* Event object */
 
-    //editAreaLoader.execCommand('console', '');
+	//editAreaLoader.execCommand('console', '');
   },
 
   /* Optional: set an ID for each tab navigation link */
@@ -116,160 +116,160 @@ var tabberOptions = {
   
   'onTabDisplay': function(argsObj) 
   {
-    var i = argsObj.index; /* Which tab was clicked (0 is the first tab) */
+	var i = argsObj.index; /* Which tab was clicked (0 is the first tab) */
 
-    if (tabsInited[i]) return;
-    tabsInited[i] = true;
-    
-    if (i==0) // console
-    {
-        editAreaLoader.init({
-	        id: "console"
-	        ,syntax: "python"
-            ,allow_resize: "no"
-            ,allow_toggle: false
-            ,fullscreen: true
-            ,language: "en"
-            ,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
-            ,begin_toolbar: "new_document, save, load, |"
-	        ,start_highlight: true
-	        ,console_callback: "consoleEvalLine"
-	        ,plugins: "console"
-        });
-    }
+	if (tabsInited[i]) return;
+	tabsInited[i] = true;
+	
+	if (i==0) // console
+	{
+		editAreaLoader.init({
+			id: "console"
+			,syntax: "python"
+			,allow_resize: "no"
+			,allow_toggle: false
+			,fullscreen: true
+			,language: "en"
+			,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
+			,begin_toolbar: "new_document, save, load, |"
+			,start_highlight: true
+			,console_callback: "consoleEvalLine"
+			,plugins: "console"
+		});
+	}
 
-    if (i==1) // entities
-    {
-        editAreaLoader.init({
-	        id: "entities"
-	        ,syntax: "python"
-            ,allow_resize: "no"
-            ,allow_toggle: false
-            ,fullscreen: true
-            ,language: "en"
-            ,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
-            ,begin_toolbar: "new_document, save, load, |"
-	        ,start_highlight: true
-	        ,entities_callback: "evalEntities"
-	        ,plugins: "entities"
-        });
-    }
+	if (i==1) // entities
+	{
+		editAreaLoader.init({
+			id: "entities"
+			,syntax: "python"
+			,allow_resize: "no"
+			,allow_toggle: false
+			,fullscreen: true
+			,language: "en"
+			,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
+			,begin_toolbar: "new_document, save, load, |"
+			,start_highlight: true
+			,entities_callback: "evalEntities"
+			,plugins: "entities"
+		});
+	}
 
-    if (i==2) // logic
-    {
-        editAreaLoader.init({
-	        id: "logic"
-	        ,syntax: "python"
-            ,allow_resize: "no"
-            ,allow_toggle: false
-            ,fullscreen: true
-            ,language: "en"
-            ,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
-            ,begin_toolbar: "new_document, save, load, |"
-	        ,start_highlight: true
-	        ,logic_callback: "evalLogic"
-	        ,plugins: "logic"
-        });
-    }
-    
-    if (i==3) // background
-    {
-        editAreaLoader.init({
-	        id: "background"
-	        ,syntax: "xml"
-            ,allow_resize: "no"
-            ,allow_toggle: false
-            ,fullscreen: true
-            ,language: "en"
-            ,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
-            ,begin_toolbar: "new_document, save, load, |"
-	        ,start_highlight: true
-	        ,background_callback: "evalBackground"
-	        ,plugins: "background"
-        });
-    }
+	if (i==2) // logic
+	{
+		editAreaLoader.init({
+			id: "logic"
+			,syntax: "python"
+			,allow_resize: "no"
+			,allow_toggle: false
+			,fullscreen: true
+			,language: "en"
+			,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
+			,begin_toolbar: "new_document, save, load, |"
+			,start_highlight: true
+			,logic_callback: "evalLogic"
+			,plugins: "logic"
+		});
+	}
+	
+	if (i==3) // background
+	{
+		editAreaLoader.init({
+			id: "background"
+			,syntax: "xml"
+			,allow_resize: "no"
+			,allow_toggle: false
+			,fullscreen: true
+			,language: "en"
+			,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
+			,begin_toolbar: "new_document, save, load, |"
+			,start_highlight: true
+			,background_callback: "evalBackground"
+			,plugins: "background"
+		});
+	}
 
-    if (i==4) // foreground
-    {
-        editAreaLoader.init({
-	        id: "foreground"
-	        ,syntax: "xml"
-            ,allow_resize: "no"
-            ,allow_toggle: false
-            ,fullscreen: true
-            ,language: "en"
-            ,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
-            ,begin_toolbar: "new_document, save, load, |"
-	        ,start_highlight: true
-	        ,foreground_callback: "evalForeground"
-	        ,plugins: "foreground"
-        });
-    }
+	if (i==4) // foreground
+	{
+		editAreaLoader.init({
+			id: "foreground"
+			,syntax: "xml"
+			,allow_resize: "no"
+			,allow_toggle: false
+			,fullscreen: true
+			,language: "en"
+			,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
+			,begin_toolbar: "new_document, save, load, |"
+			,start_highlight: true
+			,foreground_callback: "evalForeground"
+			,plugins: "foreground"
+		});
+	}
 
-    if (i==5) // XAML clipboard
-    {
-        editAreaLoader.init({
-	        id: "clipboard"
-	        ,syntax: "xml"
-            ,allow_resize: "no"
-            ,allow_toggle: false
-            ,fullscreen: true
-            ,language: "en"
-            ,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
-            ,begin_toolbar: "new_document, save, load, |"
-	        ,start_highlight: true
-        });
-    }
+	if (i==5) // XAML clipboard
+	{
+		editAreaLoader.init({
+			id: "clipboard"
+			,syntax: "xml"
+			,allow_resize: "no"
+			,allow_toggle: false
+			,fullscreen: true
+			,language: "en"
+			,toolbar: "search, go_to_line, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, |, help"
+			,begin_toolbar: "new_document, save, load, |"
+			,start_highlight: true
+		});
+	}
   }
 
 };
-    </script>
+	</script>
 
-    <script language="javascript" type="text/javascript" src="tabber.js"></script>
+	<script language="javascript" type="text/javascript" src="tabber.js"></script>
 
-    <style type="text/css">
-        html, body
-        {
-            padding: 0px;
-            margin: 0px;
-            height: 100%;
-            width: 100%;
-        }
-        #tabframe
-        {
-            position: relative;
-            top: -10px;
-        }
-        
-        #edit_area_toggle_reg_syntax.js
-        {
-            display: none;
-        }
-    </style>
+	<style type="text/css">
+		html, body
+		{
+			padding: 0px;
+			margin: 0px;
+			height: 100%;
+			width: 100%;
+		}
+		#tabframe
+		{
+			position: relative;
+			top: -10px;
+		}
+		
+		#edit_area_toggle_reg_syntax.js
+		{
+			display: none;
+		}
+	</style>
 </head>
 <body>
-    <div id="tabframe" class="tabber">
-        <div id="tabconsole" class="tabbertab" title="Console">
-            <textarea style="display:none" id="console" cols="40" rows="20"></textarea>
-        </div>
-        <div id="tabentities" class="tabbertab" title="Entities">
-            <textarea style="display:none" id="entities" cols="40" rows="20"></textarea>
-        </div>
-        <div id="tablogic" class="tabbertab" title="Logic">
-            <textarea style="display:none" id="logic" cols="40" rows="20"></textarea>
-        </div>
-        <div id="tabbackground" class="tabbertab" title="Background">
-            <textarea style="display:none" id="background" cols="40" rows="20"></textarea>
-        </div>
-        <div id="tabforeground" class="tabbertab" title="Foreground">
-            <textarea style="display:none" id="foreground" cols="40" rows="20"></textarea>
-        </div>
-        <div id="tabclipboard" class="tabbertab" title="XAML Clipboard">
-            <textarea style="display:none" id="clipboard" cols="40" rows="20">Press key R in edit mode to generate world XAML "screenshot" here</textarea>
-        </div>
-    </div>
+	<div id="tabframe" class="tabber">
+		<div id="tabconsole" class="tabbertab" title="Console">
+			<textarea style="display:none" id="console" cols="40" rows="20"></textarea>
+		</div>
+		<div id="tabentities" class="tabbertab" title="Entities">
+			<textarea style="display:none" id="entities" cols="40" rows="20"></textarea>
+		</div>
+		<div id="tablogic" class="tabbertab" title="Logic">
+			<textarea style="display:none" id="logic" cols="40" rows="20"></textarea>
+		</div>
+		<div id="tabbackground" class="tabbertab" title="Background">
+			<textarea style="display:none" id="background" cols="40" rows="20"></textarea>
+		</div>
+		<div id="tabforeground" class="tabbertab" title="Foreground">
+			<textarea style="display:none" id="foreground" cols="40" rows="20"></textarea>
+		</div>
+		<div id="tabclipboard" class="tabbertab" title="XAML Clipboard">
+			<textarea style="display:none" id="clipboard" cols="40" rows="20">Press key R in edit mode to generate world XAML "screenshot" here</textarea>
+		</div>
+	</div>
 
-    <script type="text/javascript">
+	<script type="text/javascript">
 
 /* Since we specified manualStartup=true, tabber will not run after
    the onload event. Instead let's run it now, to prevent any delay
@@ -279,59 +279,59 @@ tabberAutomatic(tabberOptions);
 
 function UpdateEntities(s)
 {
-    editAreaLoader.setValue("entities", s);
+	editAreaLoader.setValue("entities", s);
 }
 
 function RequestEntitiesSource()
 {
-    return editAreaLoader.getValue("entities");
+	return editAreaLoader.getValue("entities");
 }
 
 function EntitiesTabReady()
 {
-    var ideWindow = window.parent; // StuntsIDE.html
-    var mainWindow = ideWindow.opener; // SilverStunts.html
-    if (mainWindow && !mainWindow.closed)
-        mainWindow.OnEntitiesTabReady();
+	var ideWindow = window.parent; // ide.html
+	var mainWindow = ideWindow.opener; // index.html
+	if (mainWindow && !mainWindow.closed)
+		mainWindow.OnEntitiesTabReady();
 }
 
 function UpdateLogic(s)
 {
-    editAreaLoader.setValue("logic", s);
+	editAreaLoader.setValue("logic", s);
 }
 
 function LogicTabReady()
 {
-    var ideWindow = window.parent; // StuntsIDE.html
-    var mainWindow = ideWindow.opener; // SilverStunts.html
-    if (mainWindow && !mainWindow.closed)
-        mainWindow.OnLogicTabReady();
+	var ideWindow = window.parent; // ide.html
+	var mainWindow = ideWindow.opener; // index.html
+	if (mainWindow && !mainWindow.closed)
+		mainWindow.OnLogicTabReady();
 }
 
 function UpdateForeground(s)
 {
-    editAreaLoader.setValue("foreground", s);
+	editAreaLoader.setValue("foreground", s);
 }
 
 function ForegroundTabReady()
 {
-    var ideWindow = window.parent; // StuntsIDE.html
-    var mainWindow = ideWindow.opener; // SilverStunts.html
-    if (mainWindow && !mainWindow.closed)
-        mainWindow.OnForegroundTabReady();
+	var ideWindow = window.parent; // ide.html
+	var mainWindow = ideWindow.opener; // index.html
+	if (mainWindow && !mainWindow.closed)
+		mainWindow.OnForegroundTabReady();
 }
 
 function UpdateBackground(s)
 {
-    editAreaLoader.setValue("background", s);
+	editAreaLoader.setValue("background", s);
 }
 
 function BackgroundTabReady()
 {
-    var ideWindow = window.parent; // StuntsIDE.html
-    var mainWindow = ideWindow.opener; // SilverStunts.html
-    if (mainWindow && !mainWindow.closed)
-        mainWindow.OnBackgroundTabReady();
+	var ideWindow = window.parent; // ide.html
+	var mainWindow = ideWindow.opener; // index.html
+	if (mainWindow && !mainWindow.closed)
+		mainWindow.OnBackgroundTabReady();
 }
 
 EntitiesTabReady();
@@ -341,9 +341,9 @@ BackgroundTabReady();
 
 function UpdateClipboard(s)
 {
-    editAreaLoader.setValue("clipboard", s);
+	editAreaLoader.setValue("clipboard", s);
 }
-    </script>
+	</script>
 
 </body>
 </html>
