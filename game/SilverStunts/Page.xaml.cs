@@ -65,7 +65,7 @@ namespace SilverStunts
 		};
 		int currentLevel = 0;
 
-		int counter = 0;
+		int tick = 0;
 
 		Timer timer = new Timer();
 		Keyboard keyboard = new Keyboard();
@@ -74,8 +74,6 @@ namespace SilverStunts
 		public Level Level { get { return level;  } }
 
 		public int renderTick;
-		int physicsTick;
-		int inputTick;
 
 		DateTime deathTime;
 		bool anyKeyRestart = false;
@@ -121,8 +119,6 @@ namespace SilverStunts
 		void ResetTicks()
 		{
 			renderTick = 0;
-			physicsTick = 0;
-			inputTick = 0;
 			deathTime = DateTime.MaxValue;
 		}
 
@@ -328,21 +324,22 @@ namespace SilverStunts
 
 		public void GameTick(TimeSpan timeElapsed)
 		{
-			counter++;
+			// this game loop should run at 60FPS
+			tick++;
 
 			game.ProcessInputs(keyboard.keys);
-			inputTick++;
-			game.Simulate();
-			physicsTick++;
-			level.Tick(physicsTick, (int)timeElapsed.TotalMilliseconds);
+			game.Simulate(); // here is simulated physics
+			level.Tick(tick, (int)timeElapsed.TotalMilliseconds); // here is executed level script
 
-			if (counter % 2 == 0)
+			// throttle rendering to half speed (30FPS is OK for visuals)
+			if (tick % 2 == 0)
 			{
 				level.UpdateVisuals();
 				game.UpdateScrolling();
 				renderTick++;
 			}
 
+			// this is ugly, but who cares ...
 			HandleContinueMessage();
 		}
 
