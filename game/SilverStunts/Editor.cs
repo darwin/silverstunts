@@ -57,6 +57,8 @@ namespace SilverStunts
 
 		public void Enable()
 		{
+			scrollX = - game.cameraX;
+			scrollY = - game.cameraY + 100;
 			Active = true;
 			grid.Visibility = GridEnabled ? Visibility.Visible : Visibility.Collapsed;
 			if (names) ShowNames();

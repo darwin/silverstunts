@@ -15,8 +15,8 @@ namespace SilverStunts
 		Physics.Engine physics;
 		public Level level;
 
-		int cameraX;
-		int cameraY;
+		public int cameraX;
+		public int cameraY;
 
 		public ClipCanvas content;
 

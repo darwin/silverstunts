@@ -56,10 +56,10 @@ namespace SilverStunts
 		public Help help;
 
 		LevelDescriptor[] levels = {
+			new LevelDescriptor("intro"),
 			new LevelDescriptor("uramp"),
 			new LevelDescriptor("cavanagh"),
 			new LevelDescriptor("jezeq"),
-			new LevelDescriptor("intro"),
 			new LevelDescriptor("hill"),
 			new LevelDescriptor("stairs")
 		};
