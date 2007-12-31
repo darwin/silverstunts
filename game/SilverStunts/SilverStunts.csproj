@@ -45,15 +45,15 @@
     <Reference Include="system.silverlight" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\Bike.cs" />
+    <Compile Include="Actors\Ghost.cs" />
     <Compile Include="Entities\Surface.cs" />
-    <Compile Include="Bike.cs" />
     <Compile Include="Editor.cs" />
     <Compile Include="Entities\Circle.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Generic.cs" />
     <Compile Include="Entities\Line.cs" />
     <Compile Include="Entities\Rectangle.cs" />
-    <Compile Include="Ghost.cs" />
     <Compile Include="Gizmo.xaml.cs">
       <DependentUpon>Gizmo.xaml</DependentUpon>
     </Compile>
@@ -114,9 +114,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Visuals.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Actors\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\Silverlight\Microsoft.Silverlight.Csharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
