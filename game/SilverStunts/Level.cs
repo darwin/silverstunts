@@ -49,7 +49,7 @@ namespace SilverStunts
 		public string EntitiesSource;
 		public string LogicSource;
 
-		ScriptShell shell;
+		Shell shell;
 		public List<Visual> visuals = new List<Visual>(); // game visuals
 		List<KeyValuePair<Visual, Entity>> toBeResolved = new List<KeyValuePair<Visual, Entity>>(); // entities toBeResolved for name resolution
 
@@ -67,7 +67,7 @@ namespace SilverStunts
 			this.foreground = foreground;
 			this.background = background;
 
-			actor = new DummyActor();
+			actor = new Ghost();
 
 			InitShell(name);
 		}
@@ -76,17 +76,17 @@ namespace SilverStunts
 		{
 			Physics.Engine physics = new Physics.Engine();
 
-			physics.SetDamping(1.0);
+			physics.SetDamping(0.99);
 			physics.SetGravity(0.0, 0.5);
-			physics.SetSurfaceBounce(0.1);
-			physics.SetSurfaceFriction(0.1);
+			physics.SetSurfaceBounce(0.0);
+			physics.SetSurfaceFriction(0.2);
 
 			return physics;
 		}
 
 		public void InitShell(string name)
 		{
-			this.shell = new ScriptShell("py", name);
+			this.shell = new Shell("py", name);
 		}
 
 		public void Prepare()
@@ -282,7 +282,7 @@ namespace SilverStunts
 		{
 			foreach (Visual visual in visuals)
 			{
-				// remove visual from world            
+				// remove visual from world
 				world.Children.Remove(visual);
 
 				// remove visual from physics

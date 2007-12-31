@@ -2,9 +2,9 @@
 
 namespace SilverStunts
 {
-	public class DummyActor : IActor
+	public class Ghost : IActor
 	{
-		public DummyActor()
+		public Ghost()
 		{
 		}
 

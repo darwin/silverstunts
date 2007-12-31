@@ -9,7 +9,7 @@ namespace SilverStunts.Entities
 		public Generic(PhysicsObject source, Visual.Family family, string selector)
 		{
 			_visual = new Visual(source, family, selector);
-
+			
 			Born();
 		}
 	}

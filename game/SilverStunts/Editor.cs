@@ -58,6 +58,7 @@ namespace SilverStunts
 		{
 			Active = true;
 			grid.Visibility = GridEnabled ? Visibility.Visible : Visibility.Collapsed;
+			ShowNames();
 			if (!frozen) game.DisableSimulation();
 		}
 
@@ -68,6 +69,7 @@ namespace SilverStunts
 			clipboard.Clear();
 			Active = false;
 			grid.Visibility = Visibility.Collapsed;
+			HideNames();
 			game.EnableSimulation();
 		}
 
@@ -76,6 +78,16 @@ namespace SilverStunts
 			Deselect();
 			dragGizmos.Clear();
 			clipboard.Clear();
+		}
+
+		public void ShowNames()
+		{
+
+		}
+
+		public void HideNames()
+		{
+
 		}
 
 		public void UpdateScrolling()

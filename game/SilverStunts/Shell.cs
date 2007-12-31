@@ -5,7 +5,7 @@ using Microsoft.Scripting.Hosting;
 
 namespace SilverStunts
 {
-	public class ScriptShell
+	public class Shell
 	{
 		private string languageId;
 		private string moduleName;
@@ -17,9 +17,9 @@ namespace SilverStunts
 
 		private delegate string ReprDelegate(object arg);
 		private ReprDelegate reprDelegate;
-		private string multiline = ""; 
+		private string multiline = "";
 
-		public ScriptShell(string languageId, string name)
+		public Shell(string languageId, string name)
 		{
 			this.languageId = languageId;
 			this.moduleName = name;
@@ -180,7 +180,7 @@ namespace SilverStunts
 				if (!msg.EndsWith("\n")) msg += "\n";
 			}
 			else
-			{   
+			{
 				msg = e.Message + "\n";
 			}
 			return msg;

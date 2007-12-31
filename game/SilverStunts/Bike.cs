@@ -112,7 +112,7 @@ namespace SilverStunts
 		public void ProcessInputs(bool[] keys)
 		{
 			if (personHead.Curr.Y >= 1000) Kill();
-			double keySpeed = 0.2;
+			double keySpeed = 0.1;
 			if (IsDead())
 			{
 				wheelA.RP.Decelerate(keySpeed);
@@ -164,6 +164,7 @@ namespace SilverStunts
 				secondaryWheel = wheelA;
 			}
 
+			Vector downNormal = new Vector(0, 0);
 			if (primaryWheel.lastNormal!=null)
 			{
 				airTimeout = 0;
@@ -173,6 +174,12 @@ namespace SilverStunts
 					secondaryWheel.Curr.X -= dirX * 0.5;
 					personBody.Curr.X -= dirX;
 					personHead.Curr.X += dirX;
+				}
+				downNormal = primaryWheel.lastNormal.Clone();
+				if (secondaryWheel.lastNormal != null)
+				{
+					downNormal.Plus(secondaryWheel.lastNormal);
+					downNormal.Normalize();
 				}
 			}
 			else if (secondaryWheel.lastNormal!=null)
@@ -185,10 +192,12 @@ namespace SilverStunts
 					personBody.Curr.X -= dirX;
 					personHead.Curr.X += dirX;
 				}
+				downNormal = secondaryWheel.lastNormal;
 			}
 			else
 			{
 				// in air
+				jumpCharge = 0;
 				airTimeout++;
 
 				if (airTimeout > 10)
@@ -226,33 +235,29 @@ namespace SilverStunts
 				}
 			}
 
-			if (jumpCharge > 0 && !keyJump)
+			if (airTimeout == 0)
 			{
-				if (primaryWheel.lastNormal != null)// && (physics.tick - primaryWheel.lastlastNormalTick) < 2)
+				if (jumpCharge > 0 & !keyJump)
 				{
-					Vector n = primaryWheel.lastNormal;
-
-					jumpImpulse.X = n.X * jumpCharge;
-					jumpImpulse.Y = n.Y * jumpCharge;
+					jumpImpulse.X = downNormal.X * jumpCharge;
+					jumpImpulse.Y = downNormal.Y * jumpCharge;
+					jumpCharge = 0;
 				}
-				jumpCharge = 0;
-			}
 
-			if (keyJump)
-			{
-				if (primaryWheel.lastNormal != null)
+				if (keyJump)
 				{
 					if (jumpCharge == 0) jumpCharge = 8; // initial charge
 					if (jumpCharge < 25) jumpCharge += 0.5;
 
-					personBody.Curr.Y -= primaryWheel.lastNormal.Y * jumpCharge * 0.1;
-					personHead.Curr.Y -= primaryWheel.lastNormal.Y * jumpCharge * 0.1;
-					personBody.Curr.X -= primaryWheel.lastNormal.X * jumpCharge * 0.1;
-					personHead.Curr.X -= primaryWheel.lastNormal.X * jumpCharge * 0.1;
+					personBody.Curr.Y -= downNormal.Y * jumpCharge * 0.1;
+					personHead.Curr.Y -= downNormal.Y * jumpCharge * 0.1;
+					personBody.Curr.X -= downNormal.X * jumpCharge * 0.1;
+					personHead.Curr.X -= downNormal.X * jumpCharge * 0.1;
 					personHead.Curr.X += dirX;
 					personBody.Curr.X -= dirX;
+
+					primaryWheel.Curr.X += dirX * jumpCharge * 0.1;
 				}
-				//primaryWheel.Curr.X += dirX * jumpCharge * 0.15;
 			}
 
 			if (jumpImpulse.X != 0 || jumpImpulse.Y != 0)
