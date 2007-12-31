@@ -42,7 +42,7 @@ namespace SilverStunts
 		}
 
 		virtual public void Update() { }
-        
+
 		virtual public void StartDrag() 
 		{
 			content.Background = Brushes.Yellow;

@@ -16,6 +16,7 @@ namespace SilverStunts
 		bool gridEnabled = true;
 		public bool GridEnabled { get { return gridEnabled && zoom == 1.0; } }
 		public bool frozen = false;
+		public bool names = true;
 
 		public Canvas grid;
 		public Canvas scroller;
@@ -58,7 +59,8 @@ namespace SilverStunts
 		{
 			Active = true;
 			grid.Visibility = GridEnabled ? Visibility.Visible : Visibility.Collapsed;
-			ShowNames();
+			if (names) ShowNames();
+			EnableOnionEffect();
 			if (!frozen) game.DisableSimulation();
 		}
 
@@ -70,6 +72,7 @@ namespace SilverStunts
 			Active = false;
 			grid.Visibility = Visibility.Collapsed;
 			HideNames();
+			DisableOnionEffect();
 			game.EnableSimulation();
 		}
 
@@ -80,14 +83,131 @@ namespace SilverStunts
 			clipboard.Clear();
 		}
 
+		public void EnableOnionEffect()
+		{
+			foreach (Visual visual in game.level.visuals)
+			{
+				// apply to surfaces only
+				if (visual.family!=Visual.Family.Line && 
+					visual.family!=Visual.Family.Circle &&
+					visual.family!=Visual.Family.Rectangle) continue;
+
+				EnableOnionEffect(visual);
+			}
+			game.level.OnEntityCreated += new EventHandler<EntityCreatedArgs>(level_OnionHandler);
+		}
+
+		public static void EnableOnionEffect(Visual visual)
+		{
+			visual.content.Opacity = 0.8;
+			int count = visual.content.Children.Count;
+			bool firstLine = true;
+			for (int i = 0; i < count; i++)
+			{
+				if (visual.content.Children[i] is System.Windows.Shapes.Rectangle)
+				{
+					System.Windows.Shapes.Rectangle rect = visual.content.Children[i] as System.Windows.Shapes.Rectangle;
+					rect.Fill = Brushes.FromColor(Color.FromRgb(0xbb, 0x00, 0x00));
+				}
+				if (visual.content.Children[i] is System.Windows.Shapes.Ellipse)
+				{
+					System.Windows.Shapes.Ellipse circle = visual.content.Children[i] as System.Windows.Shapes.Ellipse;
+					circle.Fill = Brushes.FromColor(Color.FromRgb(0xaa, 0x00, 0xaa));
+				}
+				if (visual.content.Children[i] is System.Windows.Shapes.Line)
+				{
+					System.Windows.Shapes.Line line = visual.content.Children[i] as System.Windows.Shapes.Line;
+					if (firstLine)
+						line.Stroke = Brushes.FromColor(Color.FromRgb(0x00, 0xbb, 0x00));
+					else
+					{
+						line.Visibility = Visibility.Visible;
+					}
+					firstLine = false;
+				}
+			}
+		}
+
+		public void DisableOnionEffect()
+		{
+			foreach (Visual visual in game.level.visuals)
+			{
+				// apply to surfaces only
+				if (visual.family != Visual.Family.Line &&
+					visual.family != Visual.Family.Circle &&
+					visual.family != Visual.Family.Rectangle) continue;
+
+				DisableOnionEffect(visual);
+			}
+			game.level.OnEntityCreated -= new EventHandler<EntityCreatedArgs>(level_OnionHandler);
+		}
+
+		public static void DisableOnionEffect(Visual visual)
+		{
+			visual.content.Opacity = 1.0;
+			int count = visual.content.Children.Count;
+			bool firstLine = true;
+			for (int i = 0; i < count; i++)
+			{
+				if (visual.content.Children[i] is System.Windows.Shapes.Rectangle)
+				{
+					System.Windows.Shapes.Rectangle rect = visual.content.Children[i] as System.Windows.Shapes.Rectangle;
+					rect.Fill = Brushes.Gray;
+				}
+				if (visual.content.Children[i] is System.Windows.Shapes.Ellipse)
+				{
+					System.Windows.Shapes.Ellipse circle = visual.content.Children[i] as System.Windows.Shapes.Ellipse;
+					circle.Fill = Brushes.Gray;
+				}
+				if (visual.content.Children[i] is System.Windows.Shapes.Line)
+				{
+					System.Windows.Shapes.Line line = visual.content.Children[i] as System.Windows.Shapes.Line;
+					if (firstLine)
+						line.Stroke = Brushes.Gray;
+					else
+					{
+						line.Visibility = Visibility.Collapsed;
+					}
+					firstLine = false;
+				}
+			}
+		}
+
+		void level_OnionHandler(object sender, EntityCreatedArgs e)
+		{
+			EnableOnionEffect(e.visual);
+		}
+
 		public void ShowNames()
 		{
-
+			foreach (Visual visual in game.level.visuals)
+			{
+				int i = visual.content.Children.Count;
+				while (--i > 0)
+				{
+					if (visual.content.Children[i] is TextBlock)
+					{
+						TextBlock text = visual.content.Children[i] as TextBlock;
+						text.Visibility = Visibility.Visible;
+					}
+				}
+			}
 		}
 
 		public void HideNames()
 		{
-
+			foreach (Visual visual in game.level.visuals)
+			{
+				int i = visual.content.Children.Count;
+				while (--i>0) 
+				{
+					if (visual.content.Children[i] is TextBlock)
+					{
+						TextBlock text = visual.content.Children[i] as TextBlock;
+						text.Visibility = Visibility.Collapsed;
+					}
+				}
+			}
 		}
 
 		public void UpdateScrolling()
@@ -134,7 +254,8 @@ namespace SilverStunts
 			}
 			if (e.Key == 43) // N == names
 			{
-				// names
+				names = !names;
+				if (!names) HideNames(); else ShowNames();
 			}
 			if (e.Key == 13) // HOME
 			{
