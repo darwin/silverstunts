@@ -38,13 +38,13 @@
 			</TextBlock.RenderTransform>
 		</TextBlock>
 
-		<TextBlock x:Name="techpreview" Text="SilverLight technology preview - game prototype" FontWeight="Bold" Foreground="Blue" FontFamily="Monospace" FontSize="12">
+		<TextBlock x:Name="techpreview" Text="SilverStunts game prototype" FontWeight="Bold" Foreground="Blue" FontFamily="Monospace" FontSize="12">
 			<TextBlock.RenderTransform>
-				<TranslateTransform X="350" Y="0"/>
+				<TranslateTransform X="400" Y="0"/>
 			</TextBlock.RenderTransform>
 		</TextBlock>
 
-		<TextBlock x:Name="version" Text="Version: 0.1" Foreground="Gray" FontFamily="Monospace" FontSize="12">
+		<TextBlock x:Name="version" Text="Version: 0.2" Foreground="Gray" FontFamily="Monospace" FontSize="12">
 			<TextBlock.RenderTransform>
 				<TranslateTransform X="920" Y="0"/>
 			</TextBlock.RenderTransform>
@@ -53,7 +53,7 @@
 
 	<!-- bottom info line -->
 	<Canvas x:Name="bottomline" Canvas.Left="0" Canvas.Top="0">
-		<TextBlock x:Name="pinfo" Text="Tested on Windows XP in Firefox 2.0, SilverLight Alpha 1.1" Foreground="Gray" FontFamily="Monospace" FontSize="12">
+		<TextBlock x:Name="pinfo" Text="Tested on Windows XP &amp; Vista in Firefox 2.0, SilverLight 1.1 Alpha September Refresh" Foreground="Gray" FontFamily="Monospace" FontSize="12">
 			<TextBlock.RenderTransform>
 				<TranslateTransform X="4" Y="582"/>
 			</TextBlock.RenderTransform>

@@ -85,70 +85,70 @@
 
 	function OnShowWorldXAML(sender, args)
 	{
-	   if (!ide || ide.closed) return false;
-	   return ide.UpdateClipboard(args.xaml);
+		if (!ide || ide.closed) return false;
+		return ide.UpdateClipboard(args.xaml);
 	}
 
 	function OnRequestEntitiesSource(sender, args)
 	{
-	   if (!ide || ide.closed) return null;
-	   args.source = ide.RequestEntitiesSource();
+		if (!ide || ide.closed) return null;
+		args.source = ide.RequestEntitiesSource();
 	}
 	
 	function OnPublishEntitiesSource(sender, args)
 	{
-	   if (!ide || ide.closed) return null;
-	   ide.PublishEntitiesSource(args.source);
+		if (!ide || ide.closed) return null;
+		ide.PublishEntitiesSource(args.source);
 	}
 
 	function OnOpenScriptEditor(sender, args)
 	{
-	   if (ide && !ide.closed) return null;
-	   OpenIDE();
+		if (ide && !ide.closed) return null;
+		OpenIDE();
 	}
 
 	function OnUpdateIDE(sender, args)
 	{
-	   if (!ide || ide.closed) return null;
-	   UpdateIDE();
+		if (!ide || ide.closed) return null;
+		UpdateIDE();
 	}
 	
 	function UpdateConsole()
 	{
-	   if (!ide || ide.closed) return false;
-	   return ide.UpdateConsole(consoleContent);
+		if (!ide || ide.closed) return false;
+		return ide.UpdateConsole(consoleContent);
 	}
 
 	function UpdateEntities()
 	{
-	   if (!ide || ide.closed) return false;
-	   var control = document.getElementById('SilverlightControl');
-	   var entitiesSource = control.Content.page.GetEntitiesSource();
-	   return ide.UpdateEntities(entitiesSource);
+		if (!ide || ide.closed) return false;
+		var control = document.getElementById('SilverlightControl');
+		var entitiesSource = control.Content.page.GetEntitiesSource();
+		return ide.UpdateEntities(entitiesSource);
 	}
 	
 	function UpdateLogic()
 	{
-	   if (!ide || ide.closed) return false;
-	   var control = document.getElementById('SilverlightControl');
-	   var logicSource = control.Content.page.GetLogicSource();
-	   return ide.UpdateLogic(logicSource);
+		if (!ide || ide.closed) return false;
+		var control = document.getElementById('SilverlightControl');
+		var logicSource = control.Content.page.GetLogicSource();
+		return ide.UpdateLogic(logicSource);
 	}
 
 	function UpdateForeground()
 	{
-	   if (!ide || ide.closed) return false;
-	   var control = document.getElementById('SilverlightControl');
-	   var foregroundSource = control.Content.page.GetForegroundSource();
-	   return ide.UpdateForeground(foregroundSource);
+		if (!ide || ide.closed) return false;
+		var control = document.getElementById('SilverlightControl');
+		var foregroundSource = control.Content.page.GetForegroundSource();
+		return ide.UpdateForeground(foregroundSource);
 	}
 
 	function UpdateBackground()
 	{
-	   if (!ide || ide.closed) return false;
-	   var control = document.getElementById('SilverlightControl');
-	   var backgroundSource = control.Content.page.GetBackgroundSource();
-	   return ide.UpdateBackground(backgroundSource);
+		if (!ide || ide.closed) return false;
+		var control = document.getElementById('SilverlightControl');
+		var backgroundSource = control.Content.page.GetBackgroundSource();
+		return ide.UpdateBackground(backgroundSource);
 	}
 	
 	function OnConsoleReady()
@@ -188,15 +188,30 @@
 	</script>
 
 	<style type="text/css">
-		#SilverlightControlHost
-		{
-			width: 1000px;
-			height: 600px;
-			border: solid 1px black;
-		}
+		#SilverlightControlHost { width: 1000px; height: 600px; border: solid 1px black; }
+		#info { width: 1000px; height: 200px; }
+		body {font-family: Arial; }
+		p { font-size: 8pt; }
+		#help { position: absolute; left: 600px; top: 10px;}
 	</style>
 </head>
 <body>
+	<div id="info">
+	<h1>SilverStunts Game (prototype)</h1>
+	<p>
+	You need: <a href="http://www.microsoft.com/silverlight/downloads.aspx">SilverLight 1.1 Alpha September Refresh</a> to run the game.<br/>
+	Please use <a href="http://firefox.com">Firefox</a> to see this page. Under Internet Explorer there are some issues with keyboard shortcuts.<br/>
+	<br/>
+	Tested on Windows XP &amp; Vista in Firefox 2.0<br/>
+	<br/>
+	Want more? <a href="">Read article</a> | <a href="silverstunts02_src.zip">Download source code</a> | <a href="mailto:antonin@hildebrand.cz">Contact author</a><br/>
+	<br/>
+	Enjoy!<br/>
+	... and a happy New Year to all <a href="http://codeproject.com">CodeProject</a> readers! :-)
+	</div>
+	
+	<img id="help" src="images/help.png"/>
+
 	<div id="SilverlightControlHost">
 
 		<script type="text/javascript">
