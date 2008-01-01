@@ -78,9 +78,11 @@
 				parent.document.getElementById("frame_"+editArea.id).style.height= (parent.document.getElementsByTagName("html")[0].clientHeight - 20) + "px";
 			}
 			var height= document.body.offsetHeight - editArea.get_all_toolbar_height() - 4;
+			if (height<0) height = 0;
 			editArea.result.style.height= height +"px";
 			
 			var width=document.body.offsetWidth -2;
+			if (width<0) width = 0;
 			editArea.result.style.width= width+"px";
 			//alert("result h: "+ height+" w: "+width+"\ntoolbar h: "+this.get_all_toolbar_height()+"\nbody_h: "+document.body.offsetHeight);
 			
@@ -283,7 +285,10 @@
 				if(this.nav['isGecko'] || this.nav['isOpera'])
 					this.container.style.width= (area_width+45)+"px";
 				else
+				{
+					if (area_width<0) area_width  =0;
 					this.container.style.width= area_width+"px";
+				}
 				this.textarea.style.width= area_width+"px";
 				this.content_highlight.style.width= area_width+"px";	
 				this.textarea.previous_scrollWidth=area_width;

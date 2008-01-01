@@ -1,6 +1,9 @@
 	EditArea.prototype.focus = function() {
+		try{
 		this.textarea.focus();
 		this.textareaFocused=true;
+		}
+		catch (e) {}
 	};
 
 
@@ -178,6 +181,7 @@
 	
 	// set IE position in Firefox mode (textarea.selectionStart and textarea.selectionEnd)
 	EditArea.prototype.getIESelection= function(){	
+	try{
 		var range = document.selection.createRange();
 		var stored_range = range.duplicate();
 		stored_range.moveToElementText( this.textarea );
@@ -204,12 +208,14 @@
 		range_end+= (line_start + line_nb - 1 - tab.length)*2;
 		
 		this.textarea.selectionEnd = range_end;
+	}catch (e) {}
 		/*this.textarea.selectionStart = 10;
 		this.textarea.selectionEnd = 50;*/
 	};
 	
 	// select the text for IE (and take care of \r caracters)
 	EditArea.prototype.setIESelection= function(){
+		try {
 		var nbLineStart=this.textarea.value.substr(0, this.textarea.selectionStart).split("\n").length - 1;
 		var nbLineEnd=this.textarea.value.substr(0, this.textarea.selectionEnd).split("\n").length - 1;
 		var range = document.selection.createRange();
@@ -219,6 +225,7 @@
 		range.moveStart('character', this.textarea.selectionStart - nbLineStart);
 		range.moveEnd('character', this.textarea.selectionEnd - nbLineEnd - (this.textarea.selectionStart - nbLineStart)  );
 		range.select();
+		} catch (e) {}
 	};
 	
 	EditArea.prototype.tab_selection= function(){
@@ -433,7 +440,9 @@
 	
 	
 	EditArea.prototype.area_select= function(start, length){
+		try{
 		this.textarea.focus();
+		} catch (e) {}
 		
 		start= Math.max(0, Math.min(this.textarea.value.length, start));
 		end= Math.max(start, Math.min(this.textarea.value.length, start+length));

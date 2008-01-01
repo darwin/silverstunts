@@ -273,7 +273,7 @@ namespace SilverStunts
 				return true;
 			}
 
-			if (e.Key == 2 || e.PlatformKeyCode == 192) // TAB
+			if (e.Key == 2 || e.PlatformKeyCode == 192 || e.Key == 46) // TAB or Q
 			{
 				currentLevel++;
 				if (currentLevel >= levels.Length) currentLevel = 0;
@@ -301,19 +301,19 @@ namespace SilverStunts
 				return true;
 			}
 
-			if (e.Key == 56) // F1
+			if (e.Key == 56 || e.Key == 21) // F1
 			{
 				help.Visible = !help.Visible;
 				return true;
 			}
 
-			if (e.Key == 57) // F2
+			if (e.Key == 57 || e.Key == 22) // F2
 			{
 				stats.Visible = !stats.Visible;
 				return true;
 			}
 
-			if (e.Key == 59 || e.Key == 58) // F4 or F3 (for IE)
+			if (e.Key == 59 || e.Key == 58 || e.Key == 23 || e.Key == 24) // F4 or F3 (for IE)
 			{
 				OpenScriptEditor();
 				return true;

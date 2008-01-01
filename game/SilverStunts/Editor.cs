@@ -266,11 +266,11 @@ namespace SilverStunts
 				names = !names;
 				if (!names) HideNames(); else ShowNames();
 			}
-			if (e.Key == 13) // HOME
+			if (e.Key == 13 || e.Key == 20) // HOME or 0
 			{
 				ResetScrollPane();
 			}
-			if (e.Key == 12) // END = reset zoom
+			if (e.Key == 12 || e.Key == 29) // END = reset zoom or 9
 			{
 				ResetZoom();
 			}
@@ -648,11 +648,11 @@ namespace SilverStunts
 			if (keys[38]) scrollY += scrollStep; // I
 			if (keys[40]) scrollY -= scrollStep; // K
 
-			if (keys[10]) // PAGE_UP = zoom out
+			if (keys[10] || keys[55]) // PAGE_UP = zoom out or Z
 			{
 				if (zoom < 5.0) SetZoom(zoom + 0.02);
 			}
-			if (keys[11]) // PAGE_DOWN = zoom in
+			if (keys[11] || keys[53]) // PAGE_DOWN = zoom in or X
 			{
 				if (zoom > 0.2) SetZoom(zoom - 0.02);
 			}

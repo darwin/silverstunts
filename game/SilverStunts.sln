@@ -22,7 +22,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "site", "..\site\", "{017496
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "1115"
+		VWDPort = "63261"
 		DefaultWebSiteLanguage = "Visual C#"
 		ProjOutputReferences = "{D052FB1C-797A-4462-A121-1B138381BB57}|;"
 	EndProjectSection

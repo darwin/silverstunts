@@ -250,7 +250,22 @@ var tabberOptions = {
 <body>
 	<div id="tabframe" class="tabber">
 		<div id="tabconsole" class="tabbertab" title="Console">
-			<textarea style="display:none" id="console" cols="40" rows="20"></textarea>
+			<textarea style="display:none" id="console" cols="40" rows="20">
+# this is an interactive Python console 
+# you can type command on the line and hit ENTER to execute the line
+#
+# hint: use dir() command to examine python namespace
+# have fun!
+#
+dir()
+dir(physics)
+dir(physics.Gravity)
+physics.Gravity.Y = -0.1
+
+# X,Y,Radius
+my_circle = Circle(0, 0, 50)
+
+</textarea>
 		</div>
 		<div id="tabentities" class="tabbertab" title="Entities">
 			<textarea style="display:none" id="entities" cols="40" rows="20"></textarea>

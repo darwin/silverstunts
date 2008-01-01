@@ -321,6 +321,7 @@
 	
 	// select the text for IE (take into account the \r difference)
 	function set_IE_selection(textarea){
+		try {
 		var nbLineStart=textarea.value.substr(0, textarea.selectionStart).split("\n").length - 1;
 		var nbLineEnd=textarea.value.substr(0, textarea.selectionEnd).split("\n").length - 1;
 		var range = document.selection.createRange();
@@ -329,6 +330,9 @@
 		range.moveStart('character', textarea.selectionStart - nbLineStart);
 		range.moveEnd('character', textarea.selectionEnd - nbLineEnd - (textarea.selectionStart - nbLineStart)  );
 		range.select();
+		}
+		catch (e) {
+		}
 	};
 	
 	

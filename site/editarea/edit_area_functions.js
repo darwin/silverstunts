@@ -157,7 +157,9 @@
 		for(var i=0; i<this.inlinePopup.length; i++){
 			this.close_inline_popup(this.inlinePopup[i]["popup_id"]);		
 		}
+		try { 
 		this.textarea.focus();
+		} catch(e) {}
 	};
 	
 	EditArea.prototype.show_help= function(){
@@ -224,7 +226,9 @@
 				this.smooth_selection=false;
 		}
 		var icon= document.getElementById("change_smooth_selection");
+		try{
 		this.textarea.focus();
+		} catch(e) {}
 		if(this.smooth_selection===true){
 			//setAttribute(icon, "class", getAttribute(icon, "class").replace(/ selected/g, "") );
 			/*setAttribute(icon, "oldClassName", "editAreaButtonNormal" );
@@ -514,7 +518,9 @@
 		parent.editAreaLoader.resize["start_x"]= (e)? e.pageX : event.x + document.body.scrollLeft;		
 		parent.editAreaLoader.resize["start_y"]= (e)? e.pageY : event.y + document.body.scrollTop;
 		if(editArea.nav['isIE']){
+			try{
 			editArea.textarea.focus();
+			} catch (e) {}
 			editArea.getIESelection();
 		}
 		parent.editAreaLoader.resize["selectionStart"]= editArea.textarea.selectionStart;

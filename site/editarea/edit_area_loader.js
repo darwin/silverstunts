@@ -473,7 +473,10 @@
 			editAreas[id]["textarea"].style.display="inline";
 
 
+			try {
 			editAreas[id]["textarea"].focus();	
+			}
+			catch (e){}
 			if(this.nav['isIE']){
 				editAreas[id]["textarea"].selectionStart= selStart;
 				editAreas[id]["textarea"].selectionEnd= selEnd;
