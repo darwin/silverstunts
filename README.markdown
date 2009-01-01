@@ -1,6 +1,8 @@
 SilverStunts - a data driven game in SilverLight
 ===================
 
+[See full article on codeproject!][article]
+
 ![intro][intro]
 
 Features:
@@ -35,8 +37,8 @@ History
 * v0.1 (~ May.2007)
   * first experiments with SilverLight
 
-[intro]: http://www.codeproject.com/KB/silverlight/sstunts/silverstunts_intro.png "SilverStunts"
-[editor]: http://www.codeproject.com/KB/silverlight/sstunts/silverstunts_editor.png
+[intro]: http://github.com/darwin/silverstunts/tree/master/support/silverstunts_intro.png "SilverStunts"
+[editor]: http://github.com/darwin/silverstunts/tree/master/support/silverstunts_editor.png
 [article]: http://www.codeproject.com/KB/silverlight/sstunts.aspx
 
 
