@@ -37,8 +37,8 @@ History
 * v0.1 (~ May.2007)
   * first experiments with SilverLight
 
-[intro]: http://github.com/darwin/silverstunts/tree/master/support/silverstunts_intro.png?raw=true "SilverStunts"
-[editor]: http://github.com/darwin/silverstunts/tree/master/support/silverstunts_editor.png?raw=true
+[intro]: http://github.com/darwin/silverstunts/raw/master/support/silverstunts_intro.png "SilverStunts"
+[editor]: http://github.com/darwin/silverstunts/raw/master/support/silverstunts_editor.png
 [article]: http://www.codeproject.com/KB/silverlight/sstunts.aspx
 
 
